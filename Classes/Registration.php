@@ -14,4 +14,9 @@ class Registration extends BaseClass
     {
         
     }
+    
+    public function LoadRegistration()
+    {
+        
+    }
 }

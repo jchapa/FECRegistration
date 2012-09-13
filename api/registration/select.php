@@ -26,6 +26,9 @@ class SelectRegistrationAPIPage extends BaseAPIPage
         if (!$this->bIsError)
         {
             $aRegistrations = array();
+            $aRegistrationId = $this->aArgs["id"];
+
+            $oRegistration = new Registration();
         }
     }
 }
