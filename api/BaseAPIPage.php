@@ -12,10 +12,10 @@ class BaseAPIPage
     
     public function __construct()
     {
-        $this->aArgs = getArgs();
+        $this->aArgs = GetArgs();
     }
     
-    private function getArgs()
+    private function GetArgs()
     {
         $aRetval = array();
         foreach ($_REQUEST as $strKey => $strVal)
@@ -27,6 +27,12 @@ class BaseAPIPage
             unset ($aParameter);
         }
         return $aRetval;
+    }
+    
+    protected function SendResponse($strRepsonse)
+    {
+        header('Content-Type: application/json');
+        echo $strRepsonse;
     }
 
     public abstract function run();

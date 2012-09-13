@@ -8,27 +8,34 @@ class SelectRegistrationAPIPage extends BaseAPIPage
         parent::__construct();
 
         // Check that we have the correct parameters
-        if (empty($this->aArgs["id"]))
+        if (empty($this->aArgs["ids"]))
         {
             $bIsError = true;
-            // Oh snap. We need a registration id.
+            // Oh snap. We need a registration id (or comma delimited set).
             $aResponse = array(
                 "result" => "error",
                 "message" => "Oh Snap! I need a registration Id"
                 );
-            echo json_encode($aResponse);
+            $this->SendResponse(json_encode($aResponse));
             unset ($aResponse);
+            exit;
         }
     }
-    
+
     public function run()
     {
         if (!$this->bIsError)
         {
             $aRegistrations = array();
-            $aRegistrationId = $this->aArgs["id"];
+            $aRegistrationIds = split(",", $this->aArgs["id"]);
 
             $oRegistration = new Registration();
+            $oRegistration->LoadRegistration($aRegistrationIds);
+            $strRetval = json_encode($oRegistration);
+            // Output the response
+            $this->SendResponse($strRetval);
+            unset ($aRegistrationIds, $aRegistrations, $oRegistration);
+            exit;
         }
     }
 }
