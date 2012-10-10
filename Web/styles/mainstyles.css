@@ -1,0 +1,975 @@
+/*
+Theme Name: Family Economics 2013
+Theme URI: http://familyeconomics.com
+Author: Jesse Winton Design
+Author URI: http://jessewinton.com
+*/
+
+
+/*
+===================================
+TABLE OF CONTENTS
+===================================
+01. CSS RESET
+02. MAIN BODY STYLES
+03. GENERAL TYPOGRAPHY
+04. GENERAL STRUCTURE
+05. HEADER & NAVIGATION
+06. SIDEBAR
+07. PAGE SPECIFIC STYLES
+08. WIDGET STYLES & PLUGIN STYLES
+09. FOOTER
+10. GENERIC CLASSES, ID'S, CLEARS & MARGINS
+11. FONTS
+12. REGISTRATION FORM
+===================================
+*/
+
+/*
+===================================
+01. CSS RESET
+===================================
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    font-size:100%;
+    font:inherit;
+    vertical-align:baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display:block;
+}
+
+body {
+    line-height:1;
+}
+
+ol, ul {
+    list-style:none;
+}
+
+blockquote, q {
+    quotes:none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+/*
+===================================
+02. MAIN BODY STYLES
+===================================
+*/
+
+body {
+	background:#ffa231 url('../images/body.png') no-repeat center top;
+	width:100%;
+	height:100%;
+	margin:0 auto;
+	padding:0;
+	font-size:13px;
+	font-family:'HelveticaNeue', Helvetica, Arial, sans-serif;
+	text-align:left;
+	color:#58595b;
+    line-height:1.5;
+}
+
+.hide
+{
+	display:none;
+}
+
+
+/*
+===================================
+03. GENERAL TYPOGRAPHY
+===================================
+*/
+
+/*Links*/
+
+a {
+    color:#58595b;    
+	text-decoration:none;
+	-moz-transition:color .4s ease-in;
+	-o-transition:color .4s ease-in;
+	-webkit-transition:color .4s ease-in;
+}
+
+a:hover {
+	color:#999;
+}
+
+/*Paragraphs*/
+
+p {
+    margin-bottom:25px;
+}
+
+/*Headings*/
+
+h1, h2, h3, h4, h5, h6 {
+	color:#808285;
+	font-family:'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-weight:100;
+}
+
+h1 {
+	font-size:32px;
+}
+
+h2 {
+	font-size:30px;
+}
+
+h3 {
+	font-size:28px;
+}
+
+h4 {
+	font-size:26px;
+}
+
+h5 {
+	font-size:24px;
+}
+
+h6 {
+	font-size:22px;
+}
+
+h7 {
+   font-size:19px;
+   font-weight:bold;
+}
+
+/*General*/
+
+strong, b {
+	font-weight:bold;
+}
+
+em, i {
+	font-style:italic;
+}
+
+/*Custom*/
+
+.entrytitle {
+    color:#fff;
+    height:65px;
+    margin-bottom:20px;
+    line-height:105px;
+    margin-left:25px;
+    font-size:50px;
+    text-transform:none;
+    text-shadow:-1px 0px #e8c651;
+}
+
+.normal {
+	text-transform:none;
+}
+
+.uppercase {
+    text-transform:uppercase;
+}
+
+.lowercase {
+	text-transform:lowercase;
+}
+
+.sketch {
+    font-family:'SketchRockwell', Helvetica, Arial, sans-serif;
+}
+
+
+
+/*
+===================================
+04. GENERAL STRUCTURE
+===================================
+*/
+
+#container {
+    background:url('../images/content.jpg') center;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -o-border-radius:10px;
+    -webkit-border-radius:10px;
+    width:1024px;
+    height:auto;
+    margin:0 auto;
+}
+
+#content {
+    background:#fff;
+    padding:20px;
+    width:670px;
+    margin-top:25px;
+}
+
+/*Images*/
+
+.alignleft, .alignnone {
+    float:left;
+    margin:10px;
+}
+
+.alignright {
+    float:right;
+    margin:10px;
+}
+
+.aligncenter {
+    margin:10px auto;
+}
+
+
+/*
+===================================
+05. HEADER & NAVIGATION
+===================================
+*/
+
+/*Header*/
+
+#header {
+	width:100%;
+	height:150px;
+    margin-bottom:20px;
+}
+
+#header-container {
+    width:1024px;
+    height:130px;
+    margin:0 auto;
+    border-bottom:1px solid #f5d539;
+}
+
+/*Logo*/
+
+#logo {
+    background:url('../images/logo.png') no-repeat center;
+    width:400px;
+    height:100%;
+    padding-top:80px;
+}
+
+/*Navigation*/
+
+#nav {
+    margin-top:-105px;
+    float:right;
+    	width:auto;
+	height:auto;
+}
+
+.menu {
+}
+
+.menu li {
+	font-size:18px;
+	float:left;
+	padding:0 15px;
+}
+
+.menu li a {
+	font-family:'HelveticaNeue', Helvetica, Arial, sans-serif;
+	color:#fff;
+}
+
+.menu li a:hover {
+    color:#eee;
+}
+
+/*
+===================================
+06. SIDEBAR
+===================================
+*/
+
+#sidebar {
+    padding:20px;
+	width:190px;
+    margin-left:-70px;
+	height:auto;
+    margin-top:25px;
+}
+
+#sidebar .widget_pages {
+    line-height:65px;
+    color:#754c29;
+    padding-left:50px;
+    font-weight:bold;
+    font-size:20px;
+}
+
+#sidebar .widget_pages li a {
+    margin-bottom:20px;
+    display:block;
+    width:283px;
+    padding:0px 0px 0px 30px;
+    -moz-transition:all .2s ease-in;
+    -o-transition:all .2s ease-in;
+    -webkit-transition:all .2s ease-in;
+}
+
+#sidebar .widget_pages li a:hover {
+    background:rgba(253,221,112,.7) url('../images/arrow.png') no-repeat center left;
+    -moz-transition:all .2s ease-in;
+    -o-transition:all .2s ease-in;
+    -webkit-transition:all .2s ease-in;
+}
+
+#sidebar .current_page_item a {
+   display:block;
+   width:283px;
+   background:rgba(253,221,112,.7) url('../images/arrow.png') no-repeat center left;
+   padding-right:0 !important;
+}
+
+/*
+===================================
+07. PAGE SPECIFIC STYLES
+===================================
+*/
+
+/*Homepage*/
+
+.home #container {
+    background:none;
+}
+
+#home-content {
+    background:url('../images/home_banner.png') no-repeat center top;
+    width:960px;
+    height:650px; 
+    line-height:1;
+}
+
+#home-banner {
+    float:right;
+    margin-right:40px;  
+    margin-top:30px;
+}
+
+/*Homepage typography*/
+
+.shadow {
+    color:#fff;
+    text-transform:uppercase;
+    text-shadow:-1px -2px 0px #953e04;
+    -moz-text-shadow:-2px 2px 0px #953e04;
+    -o-text-shadow:-2px 2px 0px #953e04;
+    -webkit-text-shadow:-2px 2px 0px #953e04;
+}
+
+#home-banner h1 {
+    font-weight:bold;
+    font-size:90px;
+}
+
+#home-banner h3 {
+    font-weight:bold;
+    font-size:71px;
+}
+
+#home-banner h4 {
+    font-size:40px;
+}
+
+#home-banner h5 {
+    font-size:50px;
+}
+
+#home-content h6 {
+    float:right;
+    margin-right:30px;
+    margin-top:10px;
+    text-transform:none;
+    font-size:25.3px;
+}
+
+/*Homepage content*/
+
+#speakers {
+    float:right;
+    margin-top:25px;
+}
+
+#speakers li {
+    margin-right:10px;
+    float:left;
+    text-transform:uppercase;
+}
+
+#speakers .hover {
+    width:60px;
+    height:36px;
+    font-size:10px;
+    margin-left:-90px;
+    padding:60px 10px 10px 10px;
+    text-align:left;
+    background:rgba(0,0,0,.4);
+    line-height:20px;
+    opacity:0;
+    -moz-transition:opacity .5s ease-in;
+    -o-transition:opacity .5s ease-in;
+    -webkit-transition:opacity .5s ease-in;
+}
+
+#speakers .hover:hover {
+    opacity:1;
+    cursor:pointer;
+}
+
+#speakers .hover p {
+    color:#fff;
+    margin-top:50px;
+    opacity:0;
+    -moz-transition:all .3s ease-in;
+    -o-transition:all .3s ease-in;
+    -webkit-transition:all .3s ease-in;   
+}
+
+#speakers .hover:hover > p {
+    margin-top:0;
+    opacity:1;
+}
+
+.starburst {
+	height:119px;
+	width:119px;
+}
+
+/*Speakers/Meet the Families pages*/
+
+#detail-list {
+    margin:0 auto;
+    }
+
+#detail-list li {
+    display:inline-block;
+    vertical-align:top;
+    padding-bottom:10px;
+    padding-right:50px;
+    }
+
+#detail-list li:last-child {
+    padding-right:0px !important;
+}
+
+#detail-list .wp-post-image {
+    border:3px solid #fff;
+    box-shadow:0px 0px 2px #ccc;
+}
+
+/*
+===================================
+08. WIDGET STYLES & PLUGIN STYLES
+===================================
+*/
+
+#footer .widgets {
+    height:180px;
+    width:220px;
+    border-right:1px solid #9b8579;
+    padding-right:30px;
+    padding-left:30px;
+}
+
+#footer .widget-title {
+    font-weight:bold;
+    color:#fff;
+}
+
+.widget_text {
+    color:#9b8579;
+}
+
+.widgets:last-child {
+    border:none !important;
+}
+
+
+/*
+===================================
+09. FOOTER
+===================================
+*/
+
+#footer {
+    background:#4a3d36;
+    width:100%;
+    height:220px;
+    margin-top:30px;
+}
+
+#footer-container {
+    width:860px;
+    margin:0 auto;
+    padding-top:30px;
+}
+
+.home #footer {
+    background:none;
+    display:none;  
+}
+
+
+/*Social media*/
+
+#social li {
+    float:left;
+    padding-right:30px;
+}
+
+/*Pages*/
+
+#footer .widget_pages {
+    padding-right:10px;
+    font-size:15px;
+}
+
+#footer .widget_pages li a {
+    color:#f7941e;
+    margin-bottom:20px;
+}
+
+/*Signup Form*/
+
+#form-container {
+    position:relative;
+    margin:0 auto;
+    width:960px;
+}
+
+#signup-form {
+    position:fixed;
+    width:100%;
+    height:270px;
+    bottom:0px !important;
+    background-color:#4a3d36;
+    border-top:2px solid #fff;
+}
+
+#form li {
+    float:left;
+}
+
+.signup-slide {
+    position:fixed;
+    height:30px;
+    width:200px;
+    padding:20px 15px;
+    color:#333 !important;
+    background:#fff;
+    margin:0px 0px 0px -80px;
+    top:150px !important;
+    text-align:center;
+    box-shadow:0px 0px 5px rgba(0,0,0,0.4);
+    -moz-box-shadow:0px 0px 5px rgba(0,0,0,0.4);
+    -o-box-shadow:0px 0px 5px rgba(0,0,0,0.4);
+    -webkit-box-shadow:0px 0px 5px rgba(0,0,0,0.4);
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);		
+    -o-transform:rotate(90deg);
+    /* filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=1); */ 
+    -ms-transform:rotate(90deg);			
+    text-transform:uppercase;
+    line-height:40px;    
+}
+
+.signup-slide h5 {
+    font-size:18px;
+}
+
+/*Form*/
+
+label {
+    color:#fff ;
+    display:block;
+    margin-top:8px;
+    text-align:left;
+    font-weight:bold;
+    position:relative;
+    padding-left:5px;
+}
+
+.field-group {
+    margin:3px 0 15px 0;
+    padding:5px;
+    border:none;
+}
+
+.field-group input{
+    margin:0;
+    padding:5px;
+    height:25px;
+    border:0;
+    background:#fff;
+    width:300px !important;
+}
+
+.radiogroup input, .phonearea input, .addressfield input, .datefield input, .groups input {
+    width:auto;
+}
+
+.field-group label {
+}
+
+.field-group textarea {
+    background:none;
+    border:none;
+    width:525px;
+    height:150px;
+    margin:0;
+    overflow:auto;
+}
+
+.field-help { 
+    display:none;
+    font-weight:normal;
+    position:static;
+    float:none;
+    clear:both;
+    margin:5px -5px -5px -5px;
+    width:auto;
+    padding:8px 10px;
+    line-height:16px;
+    font-size:12px;
+    -moz-border-radius:0;
+    border-radius:0;
+    -webkit-border-radius:0;
+}
+
+.field-help .help {
+    min-height:16px;
+    text-decoration:none;
+}
+
+.field-group .feedback br {
+    display:none;
+}
+
+.button {
+    border:none !important;
+    text-align:center;
+    line-height:12px;
+    background:#00aade;
+    color:#fff;
+    font-size:15px;
+    font-family:Helvetica;
+    text-transform:uppercase;
+    text-shadow:0px 0px 4px rgba(0,0,0,1);    
+    -moz-text-shadow:0px 0px 4px rgba(0,0,0,1);
+    -webkit-text-shadow:0px 0px 4px rgba(0,0,0,1);
+    -moz-text-shadow:0px 0px 4px rgba(0,0,0,1);
+    -moz-transition:background .5s ease-in;    
+    -o-transition:background .5s ease-in;
+    -webkit-transition:background .5s ease-in;
+    height:37px;
+    padding:5px;
+    width:300px;
+    margin-left:5px;
+    margin-top:35px;
+}
+
+.button:hover {
+    cursor:pointer;
+    background:#0096c4;
+    -moz-transition:background .5s ease-in;    
+    -o-transition:background .5s ease-in;
+    -webkit-transition:background .5s ease-in;
+}
+
+/*
+==========================================
+10. GENERIC CLASSES, ID'S CLEARS & MARGINS
+==========================================
+*/
+
+.column {
+    float:left;
+}
+
+.clearit {
+	clear:both;
+}
+
+#grid {
+    width:170px;
+}
+
+.top35 {
+	margin-top:50px;
+}
+
+.none {
+    display:none;
+}
+
+
+/*
+===================================
+11. FONTS 
+===================================
+*/
+
+@font-face {
+    font-family: 'SketchRockwell';
+    src: url('fonts/sketchrockwell-bold.eot');
+    src: url('fonts/sketchrockwell-bold.eot?#iefix') format('embedded-opentype'),
+         url('fonts/sketchrockwell-bold.woff') format('woff'),
+         url('fonts/sketchrockwell-bold.ttf') format('truetype'),
+         url('fonts/sketchrockwell-bold.svg#sketchrockwell-bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/*
+===================================
+12. REGISTRATION FORM
+===================================
+*/
+
+#registration-details
+{
+	color:black;
+}
+
+#registration-details p
+{
+	clear:both;
+}
+
+#registration-details fieldset
+{
+	border-bottom:2px solid #e1e1e1;
+	padding-bottom:10px;
+	margin-bottom:15px;
+	margin-top:5px;
+}
+
+#registration-details label
+{
+	float:left;
+	width:auto;
+	color:#000;
+	margin-top:3px;
+	display:inline-block;
+}
+
+
+fieldset#registration-info-dds
+{
+	width:75%;
+	float:left;
+	height:85px;
+}
+
+fieldset#registration-info-dds label
+{
+	float:left;
+	width:250px;
+	color:#000;
+	margin-top:3px;
+}
+
+fieldset#person-information label
+{
+	margin-right:135px;
+}
+
+#registration-details input[type=text]
+{
+   border:none; 
+   -webkit-border-radius:5px; 
+   -moz-border-radius:5px; 
+   border-radius:5px; 
+   -webkit-box-shadow:0 0 5px #666 inset; 
+   -moz-box-shadow:0 0 5px #666 inset; 
+   box-shadow:0 0 5px #666 inset; 
+   height:25px; 
+   line-height:25px; 
+   width:200px; 
+   text-indent:5px; 
+	 margin-right:5px;
+	
+}
+
+fieldset#registration-pricing
+{
+  width:25%;
+	height:85px;
+  float:right;
+	font-family:Arial;
+	font-size:24px;
+	font-weight:bold;
+}
+
+span.early-pricing
+{
+	text-decoration:line-through;
+	float:right;
+	margin-right:25px;
+	margin-top:20px;
+}
+
+span.regular-price
+{
+	float:right;
+	margin-top:20px;
+}
+
+#registration-details ul
+{
+	float:left;
+}
+
+#registration-details ul li
+{
+  height:25px;
+	float:left;
+	margin-top:10px;
+}
+
+span#registration-total
+{
+	float:right;
+	clear:right;
+	line-height:36px;	
+	min-height:36px;
+	min-width:1px;
+	display:inline-block;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+}
+
+span#attendee-total
+{
+	float:left;
+	line-height:36px;
+	min-height:36px;
+	min-width:1px;
+	display:inline-block;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+}
+
+#contact-info input[type=text]
+{
+	width:175px;
+}
+
+#contact-info ul li
+{
+  height:25px;
+	float:left;
+	margin-top:10px;
+	clear:both;
+}
+
+#contact-info label
+{
+	width:125px;
+	float:left;
+}
+
+
+.city input[type=text] 
+{
+	width:140px !important;
+}
+
+.state input[type=text] 
+{
+	width:40px !important;
+}
+
+.zip input[type=text] 
+{
+	width:80px !important;
+}
+
+
+#reference ul li
+{
+  height:25px;
+	float:left;
+	margin-top:10px;
+	clear:both;
+}
+
+#registration-details input[type=text].error
+{
+   border:none; 
+   -webkit-border-radius:5px; 
+   -moz-border-radius:5px; 
+   border-radius:5px; 
+   -webkit-box-shadow:0 0 5px #F00 inset; 
+   -moz-box-shadow:0 0 5px #F00 inset; 
+   box-shadow:0 0 5px #F00 inset; 
+   height:25px; 
+   line-height:25px; 
+   width:200px; 
+   text-indent:5px; 
+	 margin-right:5px;	
+}
+
+#registration-details select.error
+{
+	border: 2px solid #F00;
+}
+
+label.error
+{
+	color:#F00;
+}
+
+#error-container
+{
+	width:295px;
+	position:absolute;
+	top:500px;
+	right:50%;
+	background:url(../images/arrow.png) center left;	
+	background-repeat:no-repeat;
+	margin-right:-493px;
+}
+
+#error-label-container
+{
+	width:280px;
+	background:white;
+	float:right;
+}
