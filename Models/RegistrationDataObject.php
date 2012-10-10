@@ -2,10 +2,10 @@
 class RegistrationDataObject extends CoreDataObject
 {
     public function __construct(
-        $strHost,
-        $strDatabaseName,
-        $strUsername,
-        $strPassword
+        $strHost = null,
+        $strDatabaseName = null,
+        $strUsername = null,
+        $strPassword = null
         )
     {
         parent::__construct(
@@ -19,7 +19,7 @@ class RegistrationDataObject extends CoreDataObject
     public function AddRegistration($oRegistration)
     {
         $strQuery = "insert into REGISTRATION (" .
-            "familyId, paymentId, couponId, referral)" .
+            "family_id, payment_id, coupon_id, referral)" .
             "values (" .
             $oRegistration->oFamily->iFamilyId . ", " .
             $oRegistration->oPayment->iPaymentId . ", " .
@@ -33,9 +33,9 @@ class RegistrationDataObject extends CoreDataObject
     public function UpdateRegistration($oRegistration)
     {
         $strQuery = "update REGISTRATION " .
-            "set familyId=" . $oRegistration->oFamily->iFamilyId . ", " .
-            "paymentId=" . $oRegistration->oPayment->iPaymentId . ", " .
-            "couponId=" . $oRegistration->oCoupon->iCouponId . ", " .
+            "set family_id=" . $oRegistration->oFamily->iFamilyId . ", " .
+            "payment_id=" . $oRegistration->oPayment->iPaymentId . ", " .
+            "coupon_id=" . $oRegistration->oCoupon->iCouponId . ", " .
             "referral=" . $oRegistration->strReferrer . " " .
             "where registrationId ="  . $oRegistration->iRegistrationId . ";";
         $oRetval = parent::DoQueries(array($strQuery));
@@ -55,7 +55,7 @@ class RegistrationDataObject extends CoreDataObject
     public function GetRegistrationsById($aIds)
     {
         $strQuery = "select * from REGISTRATION " .
-            "where registrationId in (";
+            "where registration_id in (";
         foreach ($aIds as $iId)
         {
             $strQuery .= $iId . ", ";

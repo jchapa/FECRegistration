@@ -1,18 +1,18 @@
 <?php
-require_once (dirname(__FILE__) . "../Classes/Registration.php");
-require_once (dirname(__FILE__) . "../Classes/Coupon.php");
-require_once (dirname(__FILE__) . "../Classes/Family.php");
-require_once (dirname(__FILE__) . "../Classes/FamilyMember.php");
-require_once (dirname(__FILE__) . "../Classes/Payment.php");
+require_once (dirname(__FILE__) . "/../Classes/Registration.php");
+require_once (dirname(__FILE__) . "/../Classes/Coupon.php");
+require_once (dirname(__FILE__) . "/../Classes/Family.php");
+require_once (dirname(__FILE__) . "/../Classes/FamilyMember.php");
+require_once (dirname(__FILE__) . "/../Classes/Payment.php");
 
-class BaseAPIPage
+abstract class BaseAPIPage
 {
     protected $aArgs = array();
     protected $bIsError = false;
     
     public function __construct()
     {
-        $this->aArgs = GetArgs();
+        $this->aArgs = $this->GetArgs();
     }
     
     private function GetArgs()
@@ -20,11 +20,8 @@ class BaseAPIPage
         $aRetval = array();
         foreach ($_REQUEST as $strKey => $strVal)
         {
-            $aParameter = array(
-                $strKey => $strVal
-                );
-            array_push($aRetval, $aParameter);
-            unset ($aParameter);
+            $aRetval[$strKey] = $strVal;
+            unset ($strKey, $strVal);
         }
         return $aRetval;
     }

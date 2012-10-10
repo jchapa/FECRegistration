@@ -1,5 +1,5 @@
 <?php
-require_once (dirname(__FILE__) . "../BaseAPIPath.php");
+require_once (dirname(__FILE__) . "/../BaseAPIPage.php");
 
 class SelectRegistrationAPIPage extends BaseAPIPage
 {
@@ -27,11 +27,11 @@ class SelectRegistrationAPIPage extends BaseAPIPage
         if (!$this->bIsError)
         {
             $aRegistrations = array();
-            $aRegistrationIds = split(",", $this->aArgs["id"]);
+            $aRegistrationIds = split(",", $this->aArgs["ids"]);
 
             $oRegistration = new Registration();
-            $oRegistration->LoadRegistration($aRegistrationIds);
-            $strRetval = json_encode($oRegistration);
+            $oRegistration->LoadRegistration($aRegistrationIds[0]);
+            $strRetval = json_encode($oRegistration->GetValuesArray());
             // Output the response
             $this->SendResponse($strRetval);
             unset ($aRegistrationIds, $aRegistrations, $oRegistration);

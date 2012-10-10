@@ -4,6 +4,6 @@ registration_id int NOT NULL AUTO_INCREMENT,
 family_id int,
 payment_id int,
 coupon_id int,
-code referral(255) NOT NULL,
+referral varchar(255) NOT NULL,
 PRIMARY KEY (registration_id)
-}
+)

@@ -1,5 +1,7 @@
 <?php
 
+require_once (dirname(__FILE__) . "/CoreDataObject.php");
+
 class CouponDataObject extends CoreDataObject
 {
     public function __construct(
