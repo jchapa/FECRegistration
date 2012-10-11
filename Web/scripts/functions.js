@@ -1,10 +1,11 @@
 // JavaScript Document
 $(document).ready(function() {
-	  //Set Drop-Down Values
-		$("#number-of-attendees")[0].selectedIndex = 0;
-		$("select#registration-type")[0].selectedIndex = 0;
-	
-	  //Registration Change function.
+    
+    //Set Drop-Down Values
+	$("#number-of-attendees")[0].selectedIndex = 0;
+	$("select#registration-type")[0].selectedIndex = 0;
+
+	//Registration Change function.
     $("select#registration-type").change(function () {
           var intRegType = $("select#registration-type")[0].selectedIndex;
 	    		var intAttendCount = $("select#number-of-attendees")[0].selectedIndex;
@@ -177,7 +178,7 @@ $(document).ready(function() {
 				},
 				zip: {
 					required: true,
-					minlength: 6
+					minlength: 5
 				},
 				phone: {
 					required: true
@@ -218,7 +219,7 @@ $(document).ready(function() {
 				},
 				zip: {
 					required: "Zip Code is required",
-					minlength: "Zip Code must be at least 6 digits"
+					minlength: "Zip Code must be at least 5 digits"
 				},
 				phone: {
 					required: "Please enter a Phone Number"

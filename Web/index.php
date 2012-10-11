@@ -1,11 +1,15 @@
-<?php session_start();
+<?php 
+// Includes
+require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
 
-$arrPostVars = array('registration-type', 'number-of-attendees', 'all-days', 'select-days', 'worship', 'street-1', 'street-2', 'city', 'state', 'zip', 'phone', 'alt-phont', 'email', 'reference-cbox');
-foreach ($arrPostVars as $v) {
-   if (isset($_POST[$v])) {
-      $_SESSION[$v] = $_POST[$v];
-   }
-}
+// First let's kick off our session
+LoadSession();
+
+// Setup our vars
+$strFormKey = "PERSONAL";
+
+// Let's get any current session info
+$aFormSessionData = GetFormSessionData($strFormKey);
 
  ?>
 
@@ -44,13 +48,6 @@ foreach ($arrPostVars as $v) {
 
 <script type="text/javascript" src="scripts/functions.js"></script>
 
-
-
-
-
-  
-		
-
 </head>
 
 <body>
@@ -79,7 +76,7 @@ foreach ($arrPostVars as $v) {
          
 	  <h2>Registration Type</h2>
 		
-    <form action="#" id="registration-details" class="fec-form">
+    <form action="payment.php" id="registration-details" class="fec-form">
       
       <div id="registration-info-types">
         <fieldset id="registration-info-dds">
@@ -88,8 +85,28 @@ foreach ($arrPostVars as $v) {
               <label for="registration-type">Registration Type</label>
               <select id="registration-type" name="registration-type">
                 <option value="0">- Please Select -</option>
-                <option value="family">Family</option>
-                <option value="individual">Individual</option>
+                <option value="family"
+                <?php 
+                    if (isset($aFormSessionData["registration-type"]))
+                    {
+                        if ($aFormSessionData["registration-type"] === "family")
+                        {
+                            echo "selected=\"selected\"";
+                        }
+                    }
+                ?>
+                >Family</option>
+                <option value="individual"
+                <?php 
+                    if (isset($aFormSessionData["registration-type"]))
+                    {
+                        if ($aFormSessionData["registration-type"] === "individual")
+                        {
+                            echo "selected=\"selected\"";
+                        }
+                    }
+                ?>
+                >Individual</option>
               </select>
             </li>
             

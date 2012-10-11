@@ -1,4 +1,15 @@
-<?php session_start();
+<?php
+// Includes
+require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
+
+// Pickup our session
+$bSessionStarted = LoadSession();
+
+if (!$bSessionStarted)
+{
+    // They shouldn't be here! We don't have a session yet
+    header("location:index.php");
+}
 
 $arrPostVars = array('registration-type', 'number-of-attendees', 'all-days', 'select-days', 'worship', 'street-1', 'street-2', 'city', 'state', 'zip', 'phone', 'alt-phont', 'email', 'reference-cbox');
 foreach ($arrPostVars as $v) {
