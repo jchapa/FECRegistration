@@ -42,7 +42,7 @@ foreach ($arrPostVars as $v) {
 <meta name="generator" content="WordPress 3.4.2" />
 <link rel='canonical' href='http://www.familyeconomics.com/facility-accommodations/' />
 
-<script type="text/javascript" src="scripts/functions.js"></script>
+<script type="text/javascript" src="scripts/payment-functions.js"></script>
 
 
 
@@ -75,196 +75,117 @@ foreach ($arrPostVars as $v) {
   <!-- Attendees -->
   <div id="content" class="column">
   
-  	 
-         
-	  <h2>Registration Type</h2>
 		
-    <form action="#" id="registration-details" class="fec-form">
-      
-      <div id="registration-info-types">
-        <fieldset id="registration-info-dds">
-          <ul id="registration-setup">
-            <li id="reg-type-li">
-              <label for="registration-type">Registration Type</label>
-              <select id="registration-type" name="registration-type">
-                <option value="0">- Please Select -</option>
-                <option value="family">Family</option>
-                <option value="individual">Individual</option>
-              </select>
-            </li>
-            
-            <li id="attendee-num-li">
-              <label for="number-of-attendees">Number of Attendees:</label>
-              <select id="number-of-attendees" name="number-of-attendees">
-                <option value="">- Please Select -</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
-              </select>
-            </li>  
-              
-          
-          </ul>
-        
-        </fieldset>
-        
-        <fieldset id="registration-pricing">
-          <span class="regular-price"></span>
-          <span class="early-pricing"></span> 
-        </fieldset>
-
-       <h2>Attendee Information</h2>        
-        
-       <fieldset id="person-information">
-        
-       
-         <ul id="person-information-list">
-        
-         </ul>  
-       
-       
-                
-       </fieldset>   
-       
-             
-       <fieldset id="person-summary">
-         <span id="attendee-total">
-           
-         </span>
-         
-         <span id="registration-total">    
-           
-         </span>
-                   
-         <p>Reminder:  The Family Economics 2013 Mega Conference is a single event co-hosted by both Generations with Vision and CHEF of Missouri.  Registration for this event covers the full 4-day admission and is not available separately.</p>
-       </fieldset>
-       
-       <fieldset>
-         <h2>Let Us Know When You'll Be There!</h2>
-         
-         <input type="checkbox" name="all-days" id="all-days" value="all" /> I plan to attend all four days <br />
-         <span>OR</span><br />
-         <input type="checkbox" name="select-days" class="select-days" value="weds"/> I plan to attend Wednesday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="thurs"/> I plan to attend Thursday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="fri"/> I plan to attend Friday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="sat"/> I plan to attend Saturday <br />
-         <br />
-         <input type="checkbox" name="worship" value="sun"/> I plan to join Kevin Swanson and Reformation Church at the St. Charles Convention Center for worship on Sunday morning following the conference.
-         
-         
-         
-       </fieldset> 
-       
+    <form id="billing-info" action="#" class="fec-form">
        <fieldset id="contact-info">
-         <h2>Contact Information</h2>
+         <h2>Billing Information</h2>
          <ul>
             <li>
+              <label for="card-name">Name on Card:</label>
+              <input type="text" id="card-name" name="card-name" />
+            </li>
+            
+            </li>
+            
+            <li>
+             <input type="checkbox" name="same-as-contact" id="same-as-contact" value="weds"/> Same as Contact Information <br />
+						</li>
+            
+            <li>
               <label for="street-1">Address 1</label>
-              <input type="text" id="street-1" name="street-1" />
+              <input type="text" class="contact-duplicate" id="street-1" name="street-1" />
             </li>
             
             <li>
               <label for="street-2">Address 2</label>
-              <input type="text" id="street-2" name="street-2" />
+              <input type="text" class="contact-duplicate" id="street-2" name="street-2" />
             </li>
             
             <li class="city">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" />
+              <input type="text" class="contact-duplicate" id="city" name="city" />
             </li>
             
             <li class="state">
               <label for="state">State</label>
-              <input type="text" id="state" name="state" />
+              <input type="text" class="contact-duplicate" id="state" name="state" />
             </li>
             
             <li class="zip">
               <label for="zip">Zip</label>
-              <input type="text" id="zip" name="zip" />
+              <input type="text" class="contact-duplicate" id="zip" name="zip" />
             </li>
             
             <li>
               <label for="phone">Phone</label>
-              <input type="text" id="phone" name="phone" />
+              <input type="text" class="contact-duplicate" id="phone" name="phone" />
             </li>
             
             <li>
               <label for="alt-phone">Alternate Phone</label>
-              <input type="text" id="alt-phone" name="alt-phone" /> 
+              <input type="text" class="contact-duplicate" id="alt-phone" name="alt-phone" /> 
             </li>
             
             <li>
               <label for="email">Email Address</label>
-              <input type="text" id="email" name="email" />
+              <input type="text" class="contact-duplicate" id="email" name="email" />
             </li>
          </ul>      
          
        </fieldset>
        
-       <fieldset id="reference">
-         <ul>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="radio" value="radio" name="reference-cbox" /> Generations Radio
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="website" value="website" name="reference-cbox" /> Generations Website/Email
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="chef" value="chef" name="reference-cbox" /> CHEF
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="friend" value="friend" name="reference-cbox" /> Friend/Word of Mouth
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="sermon" value="sermon" name="reference-cbox" /> Sermon Audio
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="chec" value="chec" name="reference-cbox" /> CHEC magazine
-          </li>
-         	<li>
-            <input type="checkbox" class="reference-cbox"  id="other" value="other" name="reference-cbox" /> Other <input type="text" id="other-text" name="other-text" disabled="true" />
-          </li>
-         </ul>
+       <fieldset id="payment-info">
+         <h2>Payment Information</h2>
        
-       </fieldset>   
+          <ul> 
+            <li>
+              <label for="card-type">Card Type</label>
+              <select id="card-type" name="card-type">
+                <option value="amex">American Express</option>
+                <option value="discover">Discover</option>
+                <option value="mastercard">MasterCard</option>
+                <option value="visa">Visa</option>
+              </select>
+            </li>
+            
+            
+            <li>
+              <label for="card-number">Card Number</label>
+              <input type="text" id="card-number" name="card-number" />
+            </li>
+            
+            <li class="year">
+              <label for="month">Expiration:</label>
+              <select id="month" name="month">
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+              </select>
+              <input type="text" class="contact-duplicate" id="name" name="year" />
+            </li>
+            
+            <li class="zip">
+              <label for="csc">Security Code</label>
+              <input type="text" id="csc" name="csc" />
+            </li>
+            
+         </ul>       
        
-       <fieldset id="submit">
-         <input type="submit" id="submit-button" style="cursor:pointer;" />
-       
-       </fieldset>  
-       
-
-		        
-      </div>
-    
-    
-    
-    
-    
-    
-    
-    
+       </fieldset>
     
     
     
     </form>
+       
     
   </div>
   
@@ -276,8 +197,8 @@ foreach ($arrPostVars as $v) {
 <ul class="widgets">
 
 <li id="pages-2" class="widget-container widget_pages"><h5 class="widget-title"> </h5>		<ul>
-<li class="current_page_item"><a href="index.php">Information</a></li>
-<li class=""><a href="payment.php">Payment</a></li>
+<li><a href="index.php">Information</a></li>
+<li class="current_page_item"><a href="payment.php">Payment</a></li>
 		</ul>
 		</li>
 </ul><!--End .widgets-->
