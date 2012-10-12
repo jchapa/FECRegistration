@@ -1,17 +1,16 @@
 <?php 
 // Includes
 require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
-
 // First let's kick off our session
 LoadSession();
 
 // Setup our vars
-$strFormKey = "PERSONAL";
+$strPersonalFormKey = "PERSONAL";
 
 // Let's get any current session info
-$aFormSessionData = GetFormSessionData($strFormKey);
+$aPersonalFormSessionData = GetFormSessionData($strPersonalFormKey);
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -51,33 +50,39 @@ $aFormSessionData = GetFormSessionData($strFormKey);
 </head>
 
 <body>
-	
+<?php 
+echo var_dump($aPersonalFormSessionData);
+?>
+
+<input type="hidden" id="wizardry" 
+<?php
+if (isset($aPersonalFormSessionData["registration-type"]))
+{
+    echo 'value="bam"';
+}
+?>
+/>
 <div id="header">
 	<div id="header-container">
 	   <a href="http://www.familyeconomics.com/"><div id="logo"></div></a><!--End #logo-->
-	
+
 	<div id="nav">
 	 <div class="menu"><ul><li ><a href="http://www.familyeconomics.com/" title="Home">Home</a></li><li class="page_item page-item-4"><a href="http://www.familyeconomics.com/vision/">Vision</a></li><li class="page_item page-item-8"><a href="http://www.familyeconomics.com/history/">History</a></li><li class="page_item page-item-63"><a href="http://www.familyeconomics.com/conference/">Conference</a></li><li class="page_item page-item-22"><a href="http://www.familyeconomics.com/meet-the-families/">Meet the Families</a></li><li class="page_item page-item-257"><a href="http://www.familyeconomics.com/sponsors/">Sponsors</a></li></ul></div>
-    </div><!--End #nav-->	
+    </div><!--End #nav-->
 
 	</div><!--End #header-container-->
-</div><!--End #header-->	
-
- 
-
+</div><!--End #header-->
 
 <div id="container">
 
   <h2 class="entrytitle">2013 Family Economics Registration</h2>
   <!-- Attendees -->
   <div id="content" class="column">
-  
-  	 
-         
+
 	  <h2>Registration Type</h2>
-		
+
     <form action="payment.php" id="registration-details" class="fec-form">
-      
+
       <div id="registration-info-types">
         <fieldset id="registration-info-dds">
           <ul id="registration-setup">
@@ -89,7 +94,7 @@ $aFormSessionData = GetFormSessionData($strFormKey);
                 <?php 
                     if (isset($aFormSessionData["registration-type"]))
                     {
-                        if ($aFormSessionData["registration-type"] === "family")
+                        if ($aPersonalFormSessionData["registration-type"] === "family")
                         {
                             echo "selected=\"selected\"";
                         }
@@ -100,7 +105,7 @@ $aFormSessionData = GetFormSessionData($strFormKey);
                 <?php 
                     if (isset($aFormSessionData["registration-type"]))
                     {
-                        if ($aFormSessionData["registration-type"] === "individual")
+                        if ($aPersonalFormSessionData["registration-type"] === "individual")
                         {
                             echo "selected=\"selected\"";
                         }
@@ -109,180 +114,286 @@ $aFormSessionData = GetFormSessionData($strFormKey);
                 >Individual</option>
               </select>
             </li>
-            
+
             <li id="attendee-num-li">
               <label for="number-of-attendees">Number of Attendees:</label>
               <select id="number-of-attendees" name="number-of-attendees">
                 <option value="">- Please Select -</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
+                <?php 
+                    for ($i = 1; $i<=20; $i++)
+                    {
+                        $strOptionContent = '<option value="'. $i . '"';
+                        if ($aPersonalFormSessionData["number-of-attendees"] ==
+                               $i
+                           )
+                        {
+                            $strOptionContent .= ' selected="selected"';
+                        }
+                        $strOptionContent .= '>' . $i . '</option>';
+                        echo $strOptionContent;
+                        $strOptionContent = "";
+                    }
+                ?>
               </select>
-            </li>  
-              
-          
+            </li>
           </ul>
-        
         </fieldset>
-        
+
         <fieldset id="registration-pricing">
           <span class="regular-price"></span>
           <span class="early-pricing"></span> 
         </fieldset>
 
-       <h2>Attendee Information</h2>        
-        
+       <h2>Attendee Information</h2>
+
        <fieldset id="person-information">
-        
-       
          <ul id="person-information-list">
-        
-         </ul>  
-       
-       
-                
-       </fieldset>   
-       
-             
+         </ul>
+       </fieldset>
+
        <fieldset id="person-summary">
          <span id="attendee-total">
-           
          </span>
-         
-         <span id="registration-total">    
-           
+         <span id="registration-total">
          </span>
-                   
          <p>Reminder:  The Family Economics 2013 Mega Conference is a single event co-hosted by both Generations with Vision and CHEF of Missouri.  Registration for this event covers the full 4-day admission and is not available separately.</p>
        </fieldset>
-       
+
        <fieldset>
          <h2>Let Us Know When You'll Be There!</h2>
-         
-         <input type="checkbox" name="all-days" id="all-days" value="all" /> I plan to attend all four days <br />
+         <input type="checkbox" name="all-days" id="all-days" value="all" 
+         <?php
+             if ($aPersonalFormSessionData["select-days"] == "all-days")
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to attend all four days <br />
          <span>OR</span><br />
-         <input type="checkbox" name="select-days" class="select-days" value="weds"/> I plan to attend Wednesday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="thurs"/> I plan to attend Thursday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="fri"/> I plan to attend Friday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="sat"/> I plan to attend Saturday <br />
+         <input type="checkbox" name="select-days" class="select-days" value="weds" 
+         <?php
+             if (false !== strpos($aPersonalFormSessionData["select-days"], "weds"))
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to attend Wednesday <br />
+         <input type="checkbox" name="select-days" class="select-days" value="thurs" 
+         <?php
+             if (false !== strpos($aPersonalFormSessionData["select-days"], "thurs"))
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to attend Thursday <br />
+         <input type="checkbox" name="select-days" class="select-days" value="fri" 
+         <?php
+             if (false !== strpos($aPersonalFormSessionData["select-days"], "fri"))
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to attend Friday <br />
+         <input type="checkbox" name="select-days" class="select-days" value="sat" 
+         <?php
+             if (false !== strpos($aPersonalFormSessionData["select-days"], "sat"))
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to attend Saturday <br />
          <br />
-         <input type="checkbox" name="worship" value="sun"/> I plan to join Kevin Swanson and Reformation Church at the St. Charles Convention Center for worship on Sunday morning following the conference.
-         
-         
-         
-       </fieldset> 
-       
+         <input type="checkbox" name="worship" value="sun" 
+         <?php
+             if (isset($aPersonalFormSessionData["worship"]))
+             {
+                 echo "checked=\"checked\"";
+             }
+         ?>
+         /> I plan to join Kevin Swanson and Reformation Church at the St. Charles Convention Center for worship on Sunday morning following the conference.
+       </fieldset>
+
        <fieldset id="contact-info">
          <h2>Contact Information</h2>
          <ul>
             <li>
               <label for="street-1">Address 1</label>
-              <input type="text" id="street-1" name="street-1" />
+              <input type="text" id="street-1" name="street-1" 
+              <?php
+                  if (isset($aPersonalFormSessionData["street-1"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["street-1"] . "\"";
+                  }
+              ?>
+               />
             </li>
-            
             <li>
               <label for="street-2">Address 2</label>
-              <input type="text" id="street-2" name="street-2" />
+              <input type="text" id="street-2" name="street-2" 
+              <?php
+                  if (isset($aPersonalFormSessionData["street-2"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["street-2"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li class="city">
               <label for="city">City</label>
-              <input type="text" id="city" name="city" />
+              <input type="text" id="city" name="city" 
+              <?php
+                  if (isset($aPersonalFormSessionData["city"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["city"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li class="state">
               <label for="state">State</label>
-              <input type="text" id="state" name="state" />
+              <input type="text" id="state" name="state" 
+              <?php
+                  if (isset($aPersonalFormSessionData["state"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["state"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li class="zip">
               <label for="zip">Zip</label>
-              <input type="text" id="zip" name="zip" />
+              <input type="text" id="zip" name="zip" 
+              <?php
+                  if (isset($aPersonalFormSessionData["zip"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["zip"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li>
               <label for="phone">Phone</label>
-              <input type="text" id="phone" name="phone" />
+              <input type="text" id="phone" name="phone" 
+              <?php
+                  if (isset($aPersonalFormSessionData["phone"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["phone"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li>
               <label for="alt-phone">Alternate Phone</label>
-              <input type="text" id="alt-phone" name="alt-phone" /> 
+              <input type="text" id="alt-phone" name="alt-phone" 
+              <?php
+                  if (isset($aPersonalFormSessionData["alt-phone"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["alt-phone"] . "\"";
+                  }
+              ?>
+              />
             </li>
-            
             <li>
               <label for="email">Email Address</label>
-              <input type="text" id="email" name="email" />
+              <input type="text" id="email" name="email" 
+              <?php
+                  if (isset($aPersonalFormSessionData["email"]))
+                  {
+                      echo "value=\"" . $aPersonalFormSessionData["email"] . "\"";
+                  }
+              ?>
+              />
             </li>
-         </ul>      
-         
+         </ul>
        </fieldset>
-       
+
        <fieldset id="reference">
          <ul>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="radio" value="radio" name="reference-cbox" /> Generations Radio
+            <input type="checkbox" class="reference-cbox"  id="radio" value="radio" name="radio" 
+            <?php
+                  if (isset($aPersonalFormSessionData["radio"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> Generations Radio
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="website" value="website" name="reference-cbox" /> Generations Website/Email
+            <input type="checkbox" class="reference-cbox"  id="website" value="website" name="website" 
+            <?php
+                  if (isset($aPersonalFormSessionData["website"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> Generations Website/Email
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="chef" value="chef" name="reference-cbox" /> CHEF
+            <input type="checkbox" class="reference-cbox"  id="chef" value="chef" name="chef" 
+            <?php
+                  if (isset($aPersonalFormSessionData["chef"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> CHEF
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="friend" value="friend" name="reference-cbox" /> Friend/Word of Mouth
+            <input type="checkbox" class="reference-cbox"  id="friend" value="friend" name="friend" 
+            <?php
+                  if (isset($aPersonalFormSessionData["friend"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> Friend/Word of Mouth
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="sermon" value="sermon" name="reference-cbox" /> Sermon Audio
+            <input type="checkbox" class="reference-cbox"  id="sermon" value="sermon" name="sermon" 
+            <?php
+                  if (isset($aPersonalFormSessionData["sermon"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> Sermon Audio
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="chec" value="chec" name="reference-cbox" /> CHEC magazine
+            <input type="checkbox" class="reference-cbox"  id="chec" value="chec" name="chec" 
+            <?php
+                  if (isset($aPersonalFormSessionData["chec"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> CHEC magazine
           </li>
          	<li>
-            <input type="checkbox" class="reference-cbox"  id="other" value="other" name="reference-cbox" /> Other <input type="text" id="other-text" name="other-text" disabled="true" />
+            <input type="checkbox" class="reference-cbox"  id="other" value="other" name="other" 
+            <?php
+                  if (isset($aPersonalFormSessionData["other"]))
+                  {
+                      echo 'checked="checked"';
+                  }
+              ?>
+            /> Other <input type="text" id="other-text" name="other-text" disabled="true" 
+            <?php
+                  if (isset($aPersonalFormSessionData["value"]))
+                  {
+                      echo 'value="' . $aPersonalFormSessionData["value"] . '"';
+                  }
+              ?>
+            />
           </li>
          </ul>
-       
-       </fieldset>   
-       
-       <fieldset id="submit">
-         <input type="submit" id="submit-button" style="cursor:pointer;" />
-       
-       </fieldset>  
-       
+       </fieldset>
 
-		        
+       <fieldset id="submit">
+         <input type="submit" id="btnSubmit" style="cursor:pointer;" value="Continue" />
+       </fieldset>
       </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     </form>
-    
   </div>
   
   

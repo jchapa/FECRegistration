@@ -1,10 +1,12 @@
 // JavaScript Document
 $(document).ready(function() {
+    if (document.getElementById("wizardry").value != "bam")
+    {
+        //Set Drop-Down Values
+    	$("#number-of-attendees")[0].selectedIndex = 0;
+    	$("select#registration-type")[0].selectedIndex = 0;
+    }
     
-    //Set Drop-Down Values
-	$("#number-of-attendees")[0].selectedIndex = 0;
-	$("select#registration-type")[0].selectedIndex = 0;
-
 	//Registration Change function.
     $("select#registration-type").change(function () {
           var intRegType = $("select#registration-type")[0].selectedIndex;
@@ -132,9 +134,7 @@ $(document).ready(function() {
 								
 				//validate Form				
 				var validate = $("#registration-details").validate({	
-				debug: true,
-
-				
+				debug: false,
 			rules: {
 				"registration-type": {
 				  valueNotEquals: 0
@@ -234,17 +234,9 @@ $(document).ready(function() {
 				}
 			},
 			errorContainer: "#error-container",
-			errorLabelContainer: "#error-label-container",
-
-			// set this class to error-labels to indicate valid fields
-			success: function(label) {
-				label.addClass("checked");
-			}, 
-		submitHandler: function(form) {
-			 $(form).ajaxSubmit({success: showResponse, target: '#server-response'});
-		 }	
+			errorLabelContainer: "#error-label-container"
 		});
-	
+
     // Payment page Scripts
 		
 		$(".same-as-contact").click(function() {

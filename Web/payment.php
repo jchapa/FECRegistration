@@ -1,24 +1,24 @@
 <?php
 // Includes
 require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
+require_once (dirname(__FILE__) . "/inc/form.personal.func.inc");
+
+$strPersonalFormKey = "PERSONAL";
+$strPaymentFormKey = "PAYMENT";
 
 // Pickup our session
 $bSessionStarted = LoadSession();
 
 if (!$bSessionStarted)
 {
-    // They shouldn't be here! We don't have a session yet
+    // We shouldn't be here! We don't have a session yet
     header("location:index.php");
 }
 
-$arrPostVars = array('registration-type', 'number-of-attendees', 'all-days', 'select-days', 'worship', 'street-1', 'street-2', 'city', 'state', 'zip', 'phone', 'alt-phont', 'email', 'reference-cbox');
-foreach ($arrPostVars as $v) {
-   if (isset($_POST[$v])) {
-      $_SESSION[$v] = $_POST[$v];
-   }
-}
+// We need to create the session from the info that was posted to us
+ProcessPersonalForm($strPersonalFormKey);
 
- ?>
+?>
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -55,17 +55,13 @@ foreach ($arrPostVars as $v) {
 
 <script type="text/javascript" src="scripts/payment-functions.js"></script>
 
-
-
-
-
-  
-		
-
 </head>
 
 <body>
-	
+
+<?php 
+echo var_dump($_SESSION);
+?>
 <div id="header">
 	<div id="header-container">
 	   <a href="http://www.familyeconomics.com/"><div id="logo"></div></a><!--End #logo-->
@@ -136,18 +132,18 @@ foreach ($arrPostVars as $v) {
               <label for="alt-phone">Alternate Phone</label>
               <input type="text" class="contact-duplicate" id="alt-phone" name="alt-phone" /> 
             </li>
-            
+
             <li>
               <label for="email">Email Address</label>
               <input type="text" class="contact-duplicate" id="email" name="email" />
             </li>
-         </ul>      
-         
+         </ul>
+
        </fieldset>
-       
+
        <fieldset id="payment-info">
          <h2>Payment Information</h2>
-       
+
           <ul> 
             <li>
               <label for="card-type">Card Type</label>
@@ -158,13 +154,12 @@ foreach ($arrPostVars as $v) {
                 <option value="visa">Visa</option>
               </select>
             </li>
-            
-            
+
             <li>
               <label for="card-number">Card Number</label>
               <input type="text" id="card-number" name="card-number" />
             </li>
-            
+
             <li class="year">
               <label for="month">Expiration:</label>
               <select id="month" name="month">
@@ -183,25 +178,14 @@ foreach ($arrPostVars as $v) {
               </select>
               <input type="text" class="contact-duplicate" id="name" name="year" />
             </li>
-            
             <li class="zip">
               <label for="csc">Security Code</label>
               <input type="text" id="csc" name="csc" />
             </li>
-            
-         </ul>       
-       
+         </ul>
        </fieldset>
-    
-    
-    
     </form>
-       
-    
   </div>
-  
-  
-
 
 <div id="sidebar" class="column">
 
