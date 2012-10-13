@@ -15,7 +15,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
         parent::__construct();
 
         // Check that we have the correct parameters
-        if (empty($this->aArgs["ids"]))
+        if (empty($this->aArgs["ids"]) && 1==2)
         {
             $bIsError = true;
             // Oh snap. We need a registration id (or comma delimited set).
@@ -41,9 +41,11 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
         {
             // Get our registration object all put together
             $oRegistration = new Registration();
-            $oFamily = new Family();
-            $oPayment = new Payment();
-            $oCoupon = new Coupon();
+            $oRegistration->oFamily = new Family();
+            $oRegistration->oPayment = new Payment();
+            $oRegistration->oCoupon = new Coupon();
+            
+            $dPrice = '0.00';
 
             // First get the session data (from the first page)
             LoadSession();
@@ -62,6 +64,16 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             {
                 $oRegistration->strRegistrationType = "individual";
                 $oRegistration->iAttendeeNumber = 1;
+            }
+            
+            // What's it cost?
+            if ($oRegistration->strRegistrationType === "individual")
+            {
+                $dPrice = '79.00';
+            }
+            else
+            {
+                $dPrice = '199.00';
             }
 
             // Who's Attending?
@@ -98,7 +110,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $oFamilyMember->strFirstName = $aAttendee[$strFirstNameKey];
                 $oFamilyMember->strLastName = $aAttendee[$strLastNameKey];
                 $oFamilyMember->strAge = $aAttendee[$strAgeKey];
-                $oFamily->AddFamilyMember($oFamilyMember);
+                $oRegistration->oFamily->AddFamilyMember($oFamilyMember);
                 unset($oFamilyMember);
             }
 
@@ -150,18 +162,30 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
              */
             
             // First, the billing information, because it's easier
+            $oRegistration->strBillingAddress1 = $aPaymentValues["street-1"];
+            $oRegistration->strBillingAddress2 = $aPaymentValues["street-2"];
+            $oRegistration->strBillingCity = $aPaymentValues["city"];
+            $oRegistration->strBillingState = $aPaymentValues["state"];
+            $oRegistration->strBillingZip = $aPaymentValues["zip"];
+            $oRegistration->strBillingPhone = $aPaymentValues["phone"];
+            $oRegistration->strBillingAltPhone = $aPaymentValues["alt-phone"];
+            $oRegistration->strBillingEmail = $aPaymentValues["email"];
             
+            // Payment Info
+            $oRegistration->oPayment->dAmount = $dPrice;
             
+            // Time for payment information
+            $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction($oRegistration);
 
             // Here we determine what happened, and output it.
-            $strRetval = json_encode("your_mom");
+            $strRetval = json_encode(array("result" => $iPaymentFlag));
             // Output the response
             $this->SendResponse($strRetval);
-            //unset($stuff, $andThings)I';
+            //unset($stuff, $andThings);
             exit;
         }
     }
 }
 
-$oPage = new SelectRegistrationAPIPage();
+$oPage = new RegisterRegistrationAPIPage();
 $oPage->run();

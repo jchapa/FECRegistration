@@ -19,4 +19,9 @@ class FamilyMember extends BaseClass
     {
         $strRetval = $this->strFirstName . " " . $this->strLastName;
     }
+    
+    public function GetValuesArray()
+    {
+    
+    }
 }

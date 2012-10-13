@@ -17,4 +17,9 @@ class Family extends BaseClass
     {
         array_push($this->aFamilyMembers, $oFamilyMember);
     }
+    
+    public function GetValuesArray()
+    {
+    
+    }
 }

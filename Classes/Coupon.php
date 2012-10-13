@@ -19,4 +19,9 @@ class Coupon extends BaseClass
     {
         
     }
+    
+    public function GetValuesArray()
+    {
+        
+    }
 }

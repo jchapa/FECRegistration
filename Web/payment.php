@@ -83,7 +83,7 @@ echo var_dump($_SESSION);
   <div id="content" class="column">
   
 		
-    <form id="billing-info" action="yourmom.foo" class="fec-form">
+    <form id="billing-info" action="/api/registration/register.php" class="fec-form">
        <fieldset id="contact-info">
          <h2>Billing Information</h2>
          <ul>
