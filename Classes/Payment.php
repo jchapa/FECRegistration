@@ -23,9 +23,11 @@ class Payment extends BaseClass
     const PAYMENT_STATUS_DECLINED = -1;
     const PAYMENT_STATUS_PENDING = 0;
     const PAYMENT_STATUS_SUCCESS = 1;
-    
+
     const AUTH_NET_TRANSACTION_ID = "";
     const AUTH_NET_TRANSACTION_KEY = "";
+    
+    // Auth net keys are defined in secure file (no push to public source control)
 
     public function __construct()
     {
@@ -47,10 +49,12 @@ class Payment extends BaseClass
     
     public function ProcessTransaction(
         Registration $oRegistration,
-            $strCardName,
-            $strCardNumber,
-            $strCardExp,
-            $strCardCVV
+        $strAuthNetTransKey,
+        $strAuthNetTransId,
+        $strCardName,
+        $strCardNumber,
+        $strCardExp,
+        $strCardCVV
         )
     {
         $this->CreateTransaction($strCardName, $strCardNumber, $strCardExp, $strCardCVV);
@@ -76,8 +80,8 @@ class Payment extends BaseClass
             'phone' => $oRegistration->strBillingPhone,
             'email' => $oRegistration->strBillingEmail,
             'invoice_num' => 'FEC2013-01', // We really need config. . .
-            'tran_key' => self::AUTH_NET_TRANSACTION_KEY,
-            'trans_id' => self::AUTH_NET_TRANSACTION_ID
+            'tran_key' => $strAuthNetTransKey,
+            'trans_id' => $strAuthNetTransId
             )
         );
         
@@ -93,7 +97,7 @@ class Payment extends BaseClass
         }
 
         // Clean up the data
-        unset($oAuthNetAPI, $aCardName, $strLastName, $strFirstName, $oResponse);
+        unset($oAuthNetAPI, $aCardName, $strLastName, $strFirstName, $oResponse, $strAuthNetId, $strAuthNetKey);
         $this->DestroyTransaction();
         return $iRetval;
     }
