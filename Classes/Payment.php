@@ -99,7 +99,8 @@ class Payment extends BaseClass
         // Clean up the data
         unset($oAuthNetAPI, $aCardName, $strLastName, $strFirstName, $oResponse, $strAuthNetId, $strAuthNetKey);
         $this->DestroyTransaction();
-        return $iRetval;
+        //return $iRetval;
+        return $oResponse;
     }
 
     /**

@@ -192,7 +192,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 );
 
             // Here we determine what happened, and output it.
-            $strRetval = json_encode(array("result" => $iPaymentFlag));
+            $strRetval = json_encode(array("result" => var_dump($iPaymentFlag)));
             // Output the response
             $this->SendResponse($strRetval);
             //unset($stuff, $andThings);
