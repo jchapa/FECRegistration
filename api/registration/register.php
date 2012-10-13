@@ -174,18 +174,17 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             
             // Get the payment info from the request.
             
-            $oRegistration->oPayment->CreateTransaction(
+            // Payment Info
+            $oRegistration->oPayment->dAmount = $dPrice;
+            
+            // Time for payment information
+            $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
+                $oRegistration,
                 $aPaymentValues["card-name"],
                 $aPaymentValues["card-number"],
                 "01/14", // TODO: IMPLEMENT!
                 $aPaymentValues["csc"]
                 );
-            
-            // Payment Info
-            $oRegistration->oPayment->dAmount = $dPrice;
-            
-            // Time for payment information
-            $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction($oRegistration);
 
             // Here we determine what happened, and output it.
             $strRetval = json_encode(array("result" => $iPaymentFlag));

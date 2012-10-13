@@ -177,11 +177,14 @@ if (isset($aPersonalFormSessionData["registration-type"]))
          </span>
          <span id="registration-total">
          </span>
-         <p>Reminder:  The Family Economics 2013 Mega Conference is a single event co-hosted by both Generations with Vision and CHEF of Missouri.  Registration for this event covers the full 4-day admission and is not available separately.</p>
+         <p>Reminder:  The Family Economics 2013 Mega Conference is a single event 
+            co-hosted by both Generations with Vision and CHEF of Missouri. 
+            Registration for this event covers the full 4-day admission and is 
+            not available separately.</p>
        </fieldset>
 
        <fieldset>
-         <h2>Let Us Know When You'll Be There!</h2>
+         <h2>Let Us Know When You Will Be There!</h2>
          <input type="checkbox" name="all-days" id="all-days" value="all" 
          <?php
              if ($aPersonalFormSessionData["select-days"] == "all-days")

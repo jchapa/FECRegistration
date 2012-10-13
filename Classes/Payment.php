@@ -32,7 +32,7 @@ class Payment extends BaseClass
 
     }
 
-    public function CreateTransaction(
+    private function CreateTransaction(
         $strCardName,
         $strCardNumber,
         $strCardExp,
@@ -45,8 +45,16 @@ class Payment extends BaseClass
         $this->strCardCVV = $strCardCVV;
     }
     
-    public function ProcessTransaction(Registration $oRegistration)
+    public function ProcessTransaction(
+        Registration $oRegistration,
+            $strCardName,
+            $strCardNumber,
+            $strCardExp,
+            $strCardCVV
+        )
     {
+        $this->CreateTransaction($strCardName, $strCardNumber, $strCardExp, $strCardCVV);
+        
         $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_PENDING;
         
         $oAuthNetAPI = new AuthorizeNetAIM();
