@@ -91,9 +91,9 @@ if (isset($aPersonalFormSessionData["registration-type"]))
     <form action="payment.php" id="registration-details" class="fec-form">
      <input type="hidden" value="
      <?php 
-		    if (isset($aFormSessionData['registration-type']))
+		    if (isset($aPersonalFormSessionData['registration-type']))
 				{
-					if ($aFormSessionData['registration-type'] = 2)
+					if ($aPersonalFormSessionData['registration-type'] = 2)
 					{
 						echo $aPersonalFormSessionData['number-of-attendees'];
 					} else {
@@ -104,7 +104,6 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 				}
 				?>
        " id="attendee-num-var" />
-     $aPersonalFormSessionData['number-of-attendees']
       <div id="registration-info-types">
         <fieldset id="registration-info-dds">
           <ul id="registration-setup">
@@ -114,7 +113,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
                 <option value="0">- Please Select -</option>
                 <option value="family"
                 <?php 
-                    if (isset($aFormSessionData["registration-type"]))
+                    if (isset($aPersonalFormSessionData["registration-type"]))
                     {
                         if ($aPersonalFormSessionData["registration-type"] === "family")
                         {
@@ -125,7 +124,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
                 >Family</option>
                 <option value="individual"
                 <?php 
-                    if (isset($aFormSessionData["registration-type"]))
+                    if (isset($aPersonalFormSessionData["registration-type"]))
                     {
                         if ($aPersonalFormSessionData["registration-type"] === "individual")
                         {

@@ -82,7 +82,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $strFirstNameKey= "FIRST";
             $strLastNameKey = "LAST";
             $strAgeKey = "AGE";
-            foreach ($aPersonalSession as $strPKey -> $strPVal)
+            foreach ($aPersonalSession as $strPKey => $strPVal)
             {
                 if (false !== strpos($strPKey, "person-name-first-"))
                 {
@@ -110,6 +110,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $oFamilyMember->strFirstName = $aAttendee[$strFirstNameKey];
                 $oFamilyMember->strLastName = $aAttendee[$strLastNameKey];
                 $oFamilyMember->strAge = $aAttendee[$strAgeKey];
+                $oFamilyMember->oFamily = $oRegistration->oFamily;
                 $oRegistration->oFamily->AddFamilyMember($oFamilyMember);
                 unset($oFamilyMember);
             }
@@ -135,7 +136,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // Referrals
             $strReferrals = "";
             if (isset($aPersonalSession["radio"]))
-                $stReferrals .= "generations radio, ";
+                $strReferrals .= "generations radio, ";
             if (isset($aPersonalSession["website"]))
                 $strReferrals .= "generations website/email, ";
             if (isset($aPersonalSession["chef"]))
@@ -170,6 +171,15 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $oRegistration->strBillingPhone = $aPaymentValues["phone"];
             $oRegistration->strBillingAltPhone = $aPaymentValues["alt-phone"];
             $oRegistration->strBillingEmail = $aPaymentValues["email"];
+            
+            // Get the payment info from the request.
+            
+            $oRegistration->oPayment->CreateTransaction(
+                $aPaymentValues["card-name"],
+                $aPaymentValues["card-number"],
+                "01/14", // TODO: IMPLEMENT!
+                $aPaymentValues["csc"]
+                );
             
             // Payment Info
             $oRegistration->oPayment->dAmount = $dPrice;

@@ -2,7 +2,7 @@
 class FamilyMember extends BaseClass
 {
     // Pull in our objects
-    protected $oFamily;
+    public $oFamily;
 
     // Define our scalars
     protected $iFamilyMemberId;

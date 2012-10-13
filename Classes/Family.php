@@ -2,7 +2,7 @@
 class Family extends BaseClass
 {
     // Pull in our objects
-    protected $aFamilyMembers;
+    protected $aFamilyMembers = array();
 
     // Define our scalars
     protected $iFamilyId;
