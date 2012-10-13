@@ -89,7 +89,22 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 	  <h2>Registration Type</h2>
 
     <form action="payment.php" id="registration-details" class="fec-form">
-
+     <input type="hidden" value="
+     <?php 
+		    if (isset($aFormSessionData['registration-type']))
+				{
+					if ($aFormSessionData['registration-type'] = 2)
+					{
+						echo $aPersonalFormSessionData['number-of-attendees'];
+					} else {
+						echo 1;
+					}
+				} else {
+					echo "";
+				}
+				?>
+       " id="attendee-num-var" />
+     $aPersonalFormSessionData['number-of-attendees']
       <div id="registration-info-types">
         <fieldset id="registration-info-dds">
           <ul id="registration-setup">
@@ -474,6 +489,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 <form action="http://generationswithvision.us2.list-manage1.com/subscribe/post" method="POST">
 <input type="hidden" name="u" value="641279d927137eec6730e767f">
 <input type="hidden" name="id" value="ae104eb7d4">
+
 
 <div id="mergeTable" class="mergeTable">
 

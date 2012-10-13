@@ -1,18 +1,15 @@
 // JavaScript Document
-$(document).ready(function() {
-    if (document.getElementById("wizardry").value != "bam")
-    {
-        //Set Drop-Down Values
-    	$("#number-of-attendees")[0].selectedIndex = 0;
-    	$("select#registration-type")[0].selectedIndex = 0;
-    }
-    
-	//Registration Change function.
-    $("select#registration-type").change(function () {
-          var intRegType = $("select#registration-type")[0].selectedIndex;
+
+			function pad2(number) {
+        return (number < 10 ? '0' : '') + number;
+      }
+			
+			function setRegTypeOnChange() {
+				  var intRegType = $("#registration-type")[0].selectedIndex;
 	    		var intAttendCount = $("select#number-of-attendees")[0].selectedIndex;
       		var intPersonLICount = $("ul#person-information-list li").length;
-					var newLI = '<li class="person-information hide">\r\n<!-- First Name -->\r\n<input type="text" class="person-name-first" name="person-name-first" />\r\n<!-- Last Name -->\r\n<input type="text" class="person-name-last" name="person-name-last"/>\r\n<!-- Age -->\r\n<select class="person-age" name="person-age">\r\n<option value="1">Infant/Toddler (1-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
+					var pID = intPersonLICount;
+					var newLI = '<li class="person-information hide">\r\n<!-- First Name -->\r\n<input type="text" class="person-name-first" name="person-name-first-' + pad2(pID) + '" />\r\n<!-- Last Name -->\r\n<input type="text" class="person-name-last" name="person-name-last-' + pad2(pID) + '"/>\r\n<!-- Age -->\r\n<select class="person-age" name="person-age-' + pad2(pID) +  '">\r\n<option value="1">Infant/Toddler (1-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
 					switch (intRegType) {
 						case 0: ;break;
 						case 1: 
@@ -48,23 +45,29 @@ $(document).ready(function() {
 							}
 						  break;
 					}
-        });
-				
-      //Number of Attendees Function - Math included to calculate and trim LI's   
-      $("select#number-of-attendees").change(function() {
+			}
+			
+			function setNumOfAttOnChange(num) {
     		//Set Variables
-    		var intAttendCount = $("select#number-of-attendees")[0].selectedIndex;
+				if (num) {
+					var intAttendCount = num;
+				} else {
+    		  var intAttendCount = $("select#number-of-attendees")[0].selectedIndex;
+				}
     		var intPersonLICount = $("ul#person-information-list li").length;
-				var newLI = '<li class="person-information hide">\r\n<!-- First Name -->\r\n<input type="text" class="person-name-first" name="person-name-first" />\r\n<!-- Last Name -->\r\n<input type="text" class="person-name-last" name="person-name-last"/>\r\n<!-- Age -->\r\n<select class="person-age" name="person-age">\r\n<option value="1">Infant/Toddler (1-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
+				var pID = intPersonLICount;
     		$("#attendee-total").text('Total: ' + intAttendCount + ' Attendees');
     		//Compare LI Count and drop-down number to determine whether to append LI or remove
     		if (intAttendCount > intPersonLICount)
     		  {
      		    //append LI's	
 						var intResult = intAttendCount - intPersonLICount;
+
 						for(i=0;i<intResult;i++){
+						var newLI = '<li class="person-information hide">\r\n<!-- First Name -->\r\n<input type="text" class="person-name-first" name="person-name-first-' + pad2(pID) + '" />\r\n<!-- Last Name -->\r\n<input type="text" class="person-name-last" name="person-name-last-' + pad2(pID) + '"/>\r\n<!-- Age -->\r\n<select class="person-age" name="person-age-' + pad2(pID) +  '">\r\n<option value="1">Infant/Toddler (1-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
 							$("#person-information-list").append(newLI);
 							$("#person-information-list li:last-child").fadeIn('slow');
+              pID++;
 						};
     		  }
     		else if (intAttendCount < intPersonLICount)
@@ -76,7 +79,32 @@ $(document).ready(function() {
 						};
     		  } 
     		 
-    		});
+    		}
+
+$(document).ready(function() {
+    if (document.getElementById("wizardry").value != "bam")
+    {
+
+        //Set Drop-Down Values
+    	$("#number-of-attendees")[0].selectedIndex = 0;
+    	$("select#registration-type")[0].selectedIndex = 0;
+    } else {
+			var attNum = document.getElementById("attendee-num-var");
+			if (x)
+			{
+				 $("select#registration-type").change(setRegTypeOnChange);
+	       $("select#number-of-attendees").change(setNumOfAttOnChange);
+			} else {
+				 $("select#registration-type").change(setRegTypeOnChange);
+         $("select#number-of-attendees").change(setNumOfAttOnChange(x));				 				
+			}
+		}
+    
+	    //Registration Change function.
+     
+				
+      //Number of Attendees Function - Math included to calculate and trim LI's   
+      $("select#number-of-attendees").change(setNumOfAttOnChange);
 				
 				//Attending Functions
 				$("#all-days").click(function() {
@@ -248,3 +276,5 @@ $(document).ready(function() {
 		});
     		
 });
+
+
