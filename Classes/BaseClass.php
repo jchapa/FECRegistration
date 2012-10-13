@@ -5,7 +5,7 @@ require_once (dirname(__FILE__) . "/../Models/FamilyMemberDataObject.php");
 require_once (dirname(__FILE__) . "/../Models/PaymentDataObject.php");
 require_once (dirname(__FILE__) . "/../Models/RegistrationDataObject.php");
 
-class BaseClass
+abstract class BaseClass
 {
-    
+    abstract function GetValuesArray();
 }

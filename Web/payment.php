@@ -83,7 +83,7 @@ echo var_dump($_SESSION);
   <div id="content" class="column">
   
 		
-    <form id="billing-info" action="#" class="fec-form">
+    <form id="billing-info" action="yourmom.foo" class="fec-form">
        <fieldset id="contact-info">
          <h2>Billing Information</h2>
          <ul>
@@ -95,6 +95,7 @@ echo var_dump($_SESSION);
             </li>
             
             <li>
+            <!-- If this button works, go hug the nearest developer -->
              <input type="checkbox" name="same-as-contact" id="same-as-contact" value="weds"/> Same as Contact Information <br />
 						</li>
             
@@ -176,13 +177,17 @@ echo var_dump($_SESSION);
                 <option value="11">Nov</option>
                 <option value="12">Dec</option>
               </select>
-              <input type="text" class="contact-duplicate" id="name" name="year" />
+              <input type="text" class="contact-duplicate" id="name" name="year" /> (YYYY) <!-- that's right - all four numbers -->
             </li>
             <li class="zip">
               <label for="csc">Security Code</label>
               <input type="text" id="csc" name="csc" />
             </li>
          </ul>
+       </fieldset>
+       
+       <fieldset id="submit">
+         <input type="submit" id="btnSubmit" style="cursor:pointer;" value="Process Registration" /> (We will try to charge your card)
        </fieldset>
     </form>
   </div>

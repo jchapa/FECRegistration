@@ -6,8 +6,9 @@ class FamilyMember extends BaseClass
 
     // Define our scalars
     protected $iFamilyMemberId;
-    protected $strFirstName;
-    protected $strLastName;
+    public $strFirstName;
+    public $strLastName;
+    public $strAge;
 
     public function __construct()
     {

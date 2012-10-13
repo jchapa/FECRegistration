@@ -4,6 +4,7 @@ require_once (dirname(__FILE__) . "/../Classes/Coupon.php");
 require_once (dirname(__FILE__) . "/../Classes/Family.php");
 require_once (dirname(__FILE__) . "/../Classes/FamilyMember.php");
 require_once (dirname(__FILE__) . "/../Classes/Payment.php");
+require_once (dirname(__FILE__) . "/../Web/inc/session.form.func.inc");
 
 abstract class BaseAPIPage
 {

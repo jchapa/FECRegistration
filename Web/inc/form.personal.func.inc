@@ -6,7 +6,15 @@ function ProcessPersonalForm($strFormKey)
     $aPersonalVals = array();
     foreach ($aPostVars as $strKey => $strVal)
     {
-        $aPersonalVals[$strKey] = $strVal;
+        if (isset($aPersonalVals[$strKey]))
+        {
+            // Duplicate key!. Let's append
+            $aPersonalVals[$strKey] .= $strVal;
+        }
+        else
+        {
+            $aPersonalVals[$strKey] = $strVal;
+        }
     }
     WriteFormSessionData($strFormKey, $aPersonalVals);
 }

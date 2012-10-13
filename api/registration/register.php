@@ -1,6 +1,12 @@
 <?php
 require_once (dirname(__FILE__) . "/../BaseAPIPage.php");
 
+/**
+ * This service registers users from the web interface. You have to be a sessioned
+ * user for it to work - posting the payment data
+ * @author jchapa
+ *
+ */
 class RegisterRegistrationAPIPage extends BaseAPIPage
 {
     public function __construct()
@@ -25,17 +31,133 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
 
     public function run()
     {
+        /* We have a couple steps in this workflow
+         * 0) Submit registration with pending flag (stop if this fails - don't charge card)
+         * 1) Attempt to process payment
+         * 1.1) If Payment Fails: Send validation message - don't persist
+         * 1.2) If Payment Succeeds: Update pending flag, tell user you love him
+        */ 
         if (!$this->bIsError)
         {
-            $aRegistrations = array();
-            $aRegistrationIds = split(",", $this->aArgs["ids"]);
-
+            // Get our registration object all put together
             $oRegistration = new Registration();
-            $oRegistration->LoadRegistration($aRegistrationIds[0]);
-            $strRetval = json_encode($oRegistration->GetValuesArray());
+            $oFamily = new Family();
+            $oPayment = new Payment();
+            $oCoupon = new Coupon();
+
+            // First get the session data (from the first page)
+            LoadSession();
+            // Now let's populate that session
+            $strPersonalFormKey = "PERSONAL";
+            $aPersonalSession = GetFormSessionData($strPersonalFormKey);
+
+            // Registration Type and qty of attendees
+            if ($aPersonalSession["registration-type"] === "family")
+            {
+                $oRegistration->strRegistrationType = "family";
+                $oRegistration->iAttendeeNumber = 
+                    $aPersonalSession["number-of-attendees"];
+            }
+            else
+            {
+                $oRegistration->strRegistrationType = "individual";
+                $oRegistration->iAttendeeNumber = 1;
+            }
+
+            // Who's Attending?
+
+            $aAttendees = array();
+            $strFirstNameKey= "FIRST";
+            $strLastNameKey = "LAST";
+            $strAgeKey = "AGE";
+            foreach ($aPersonalSession as $strPKey -> $strPVal)
+            {
+                if (false !== strpos($strPKey, "person-name-first-"))
+                {
+                    // Grab the last two chars for the id ('tis zero padded)
+                    $strAttendeeId = substr($strPKey, strlen($strPKey) - 2, 2);
+                    $aAttendees[$strAttendeeId][$strFirstNameKey] = $strPVal;
+                }
+                if (false !== strpos($strPKey, "person-name-last-"))
+                {
+                    // Grab the last two chars for the id ('tis zero padded)
+                    $strAttendeeId = substr($strPKey, strlen($strPKey) - 2, 2);
+                    $aAttendees[$strAttendeeId][$strLastNameKey] = $strPVal;
+                }
+                if (false !== strpos($strPKey, "person-age-"))
+                {
+                    // Grab the last two chars for the id ('tis zero padded)
+                    $strAttendeeId = substr($strPKey, strlen($strPKey) - 2, 2);
+                    $aAttendees[$strAttendeeId][$strAgeKey] = $strPVal;
+                }
+            }
+            
+            foreach ($aAttendees as $aAttendee)
+            {
+                $oFamilyMember = new FamilyMember();
+                $oFamilyMember->strFirstName = $aAttendee[$strFirstNameKey];
+                $oFamilyMember->strLastName = $aAttendee[$strLastNameKey];
+                $oFamilyMember->strAge = $aAttendee[$strAgeKey];
+                $oFamily->AddFamilyMember($oFamilyMember);
+                unset($oFamilyMember);
+            }
+
+            // Days Attending
+
+            // Still waiting for this to be implemented. Cheeze for now
+            $oRegistration->bAttendingSaturday = true;
+            $oRegistration->bAttendingFriday = true;
+            $oRegistration->bAttendingThursday = true;
+            $oRegistration->bAttendingWednesday = true;
+            
+            // Address time!
+            $oRegistration->strContactAddress1 = $aPersonalSession["street-1"];
+            $oRegistration->strContactAddress2 = $aPersonalSession["street-2"];
+            $oRegistration->strContactCity = $aPersonalSession["city"];
+            $oRegistration->strContactState = $aPersonalSession["state"];
+            $oRegistration->strContactZip = $aPersonalSession["zip"];
+            $oRegistration->strContactPhone = $aPersonalSession["phone"];
+            $oRegistration->strContactAltPhone = $aPersonalSession["alt-phone"];
+            $oRegistration->strContactEmail = $aPersonalSession["email"];
+            
+            // Referrals
+            $strReferrals = "";
+            if (isset($aPersonalSession["radio"]))
+                $stReferrals .= "generations radio, ";
+            if (isset($aPersonalSession["website"]))
+                $strReferrals .= "generations website/email, ";
+            if (isset($aPersonalSession["chef"]))
+                $strReferrals .= "chef, ";
+            if (isset($aPersonalSession["friend"]))
+                $strReferrals .= "friend/word of mouth, ";
+            if (isset($aPersonalSession["chec"]))
+                $strReferrals .= "chec magazine, ";
+            // Still include a comma terminator to keep it consistant
+            if (isset($aPersonalSession["other"]))
+                $strReferrals .= "other, ";
+            
+            $oRegistration->strReferral = $strReferrals;
+            unset($strReferrals);
+            
+            // Now let's look at the payment post (which is what's happening here)
+            $aPaymentValues = $_REQUEST;
+            
+            /*
+             * I should have data for
+             * 1) Card Information (Name, number, etc)
+             * 2) Billing Address (which just might be the same as contact info,
+             *     but honeybadger don't care!)
+             */
+            
+            // First, the billing information, because it's easier
+            
+            
+
+            // Here we determine what happened, and output it.
+            $strRetval = json_encode("your_mom");
             // Output the response
             $this->SendResponse($strRetval);
-            unset ($aRegistrationIds, $aRegistrations, $oRegistration);
+            //unset($stuff, $andThings)I';
             exit;
         }
     }

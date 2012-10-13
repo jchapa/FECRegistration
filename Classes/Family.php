@@ -12,4 +12,9 @@ class Family extends BaseClass
     {
         
     }
+    
+    public function AddFamilyMember(FamilyMember $oFamilyMember)
+    {
+        array_push($this->aFamilyMembers, $oFamilyMember);
+    }
 }

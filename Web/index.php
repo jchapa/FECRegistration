@@ -1,10 +1,14 @@
 <?php 
 // Includes
 require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
+
+//Debug - SET TO FALSE FOR PRODUCTION
+$bDebug = true;
+
 // First let's kick off our session
 LoadSession();
 
-// Setup our vars
+// Setup our vars (should eventually load from config/randomize itself)
 $strPersonalFormKey = "PERSONAL";
 
 // Let's get any current session info
@@ -51,7 +55,10 @@ $aPersonalFormSessionData = GetFormSessionData($strPersonalFormKey);
 
 <body>
 <?php 
-echo var_dump($aPersonalFormSessionData);
+if ($bDebug)
+{
+    echo var_dump($aPersonalFormSessionData);
+}
 ?>
 
 <input type="hidden" id="wizardry" 
