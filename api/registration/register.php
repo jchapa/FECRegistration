@@ -177,8 +177,8 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // Payment Info
             $oRegistration->oPayment->dAmount = $dPrice;
             
-            $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../config/auth_net_transaction_key.txt');
-            $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../config/auth_net_transaction_id.txt');
+            $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_key.txt');
+            $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_id.txt');
             
             // Time for payment information
             $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
