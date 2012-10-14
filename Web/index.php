@@ -106,6 +106,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
                 ?>
                 >Individual</option>
               </select>
+              <div id="reg-detail" title="Family Rate includes immediate family" class="target"><span>?</span></div>
             </li>
 
             <li id="attendee-num-li">

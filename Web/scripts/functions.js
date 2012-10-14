@@ -35,9 +35,9 @@ function setRegTypeOnChange() {
         ;
         break;
     case 2:
-        $(".regular-price").text('$79');
+        $(".regular-price").text('$89');
         $(".early-pricing").text('$109');
-        $("#registration-total").text('$79');
+        $("#registration-total").text('$89');
         $("#attendee-num-li").fadeOut('fast', null, function() {
             $("#registration-setup").css('margin-bottom', '35px')
         });
@@ -125,7 +125,7 @@ $(document)
 
                     // Registration Change function.
                     
-                    $("select#registration-type").change(setRegTypeOnChange);
+                    $("select#registration-type").change(setRegTypeOnChange); 
 
                     // Number of Attendees Function - Math included to calculate
                     // and trim LI's
