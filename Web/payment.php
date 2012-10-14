@@ -91,7 +91,7 @@ echo var_dump($_SESSION);
                 }
             ?>
             </p>
-            <p><strong>Registration Type: </strong>
+            <p><strong>Registration Cost: </strong>
             <?php 
                 if (isset($aPersonalFormSessionData["registration-type"]))
                 {
