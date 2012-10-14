@@ -172,7 +172,7 @@ class Payment extends BaseClass
         $response_array = explode($post_values["x_delim_char"],$post_response);
         $this->DestroyTransaction();
         //return $iRetval;
-        return $oResponse;
+        return $post_response;
     }
 
     /**
