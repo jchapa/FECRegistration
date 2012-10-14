@@ -44,7 +44,6 @@ require_once (dirname(__FILE__) . "/shared/AuthorizeNetXMLResponse.php");
  */
 class AuthorizeNetAIM extends AuthorizeNetRequest
 {
-
     const LIVE_URL = 'https://secure.authorize.net/gateway/transact.dll';
     const SANDBOX_URL = 'https://test.authorize.net/gateway/transact.dll';
     
@@ -95,6 +94,11 @@ class AuthorizeNetAIM extends AuthorizeNetRequest
         "trans_id","type","version","zip"
         );
     
+    public function __construct($api_login_id, $transaction_key)
+    {
+        parent::__construct($api_login_id, $transaction_key);
+    }
+        
     /**
      * Do an AUTH_CAPTURE transaction. 
      * 

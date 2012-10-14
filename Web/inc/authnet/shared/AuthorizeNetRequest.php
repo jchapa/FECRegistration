@@ -11,7 +11,7 @@ abstract class AuthorizeNetRequest
     protected $_api_login;
     protected $_transaction_key;
     protected $_post_string; 
-    public $VERIFY_PEER = true; // Set to false if getting connection errors.
+    public $VERIFY_PEER = false; // Set to false if getting connection errors.
     protected $_sandbox = true;
     protected $_log_file = false;
     
@@ -39,6 +39,8 @@ abstract class AuthorizeNetRequest
      */
     public function __construct($api_login_id = false, $transaction_key = false)
     {
+        $api_login_id = trim($api_login_id);
+        $transaction_key = trim($transaction_key);
         $this->_api_login = ($api_login_id ? $api_login_id : (defined('AUTHORIZENET_API_LOGIN_ID') ? AUTHORIZENET_API_LOGIN_ID : ""));
         $this->_transaction_key = ($transaction_key ? $transaction_key : (defined('AUTHORIZENET_TRANSACTION_KEY') ? AUTHORIZENET_TRANSACTION_KEY : ""));
         $this->_sandbox = (defined('AUTHORIZENET_SANDBOX') ? AUTHORIZENET_SANDBOX : true);
