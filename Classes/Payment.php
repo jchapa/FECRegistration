@@ -20,8 +20,8 @@ class Payment extends BaseClass
     private $strCardExp;
     private $strCardCVV;
 
-    const PAYMENT_STATUS_DECLINED = -1;
-    const PAYMENT_STATUS_PENDING = 0;
+    const PAYMENT_STATUS_DECLINED = 2;
+    const PAYMENT_STATUS_ERROR = 3;
     const PAYMENT_STATUS_SUCCESS = 1;
 
     const AUTH_NET_TRANSACTION_ID = "";
@@ -96,12 +96,13 @@ class Payment extends BaseClass
             $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_DECLINED;
         }
 
-        // Clean up the data
-        unset($oAuthNetAPI, $aCardName, $strLastName, $strFirstName, $strAuthNetId, $strAuthNetKey);
         */
-        $post_url = "https://test.authorize.net/gateway/transact.dll";
+        $post_url = "https://secure.authorize.net/gateway/transact.dll";
         $strAuthNetTransId = trim($strAuthNetTransId);
         $strAuthNetTransKey = trim($strAuthNetTransKey);
+        $aCardName = explode(' ', $this->strCardName);
+        $strLastName = array_pop($aCardName);
+        $strFirstName = implode(" ", $aCardName);
         $post_values = array(
         
                 // the API Login ID and Transaction Key must be replaced with valid values
@@ -115,17 +116,20 @@ class Payment extends BaseClass
         
                 "x_type"			=> "AUTH_CAPTURE",
                 "x_method"			=> "CC",
-                "x_card_num"		=> "4111111111111111",
-                "x_exp_date"		=> "0115",
+                "x_card_num"		=> $this->strCardNumber,
+                "x_exp_date"		=> $this->strCardExp,
         
-                "x_amount"			=> "1.99",
-                "x_description"		=> "Sample Transaction",
+                "x_amount"			=> $this->dAmount,
+                "x_invoice_num"		=> "FEC2012-01",
         
-                "x_first_name"		=> "John",
-                "x_last_name"		=> "Doe",
-                "x_address"			=> "1234 Street",
-                "x_state"			=> "WA",
-                "x_zip"				=> "98004"
+                "x_first_name"		=> $strFirstName,
+                "x_last_name"		=> $strLastName,
+                "x_address"			=> $oRegistration->strBillingAddress1 . " " . $oRegistration->strBillingAddress2,
+                "x_city"            => $oRegistration->strBillingCity,
+                "x_state"			=> $oRegistration->strBillingState,
+                "x_zip"				=> $oRegistration->strBillingZip,
+                "x_phone"           => $oRegistration->strBillingPhone,
+                "x_email"           => $oRegistration->strBillingEmail
                 // Additional fields can be added here as outlined in the AIM integration
                 // guide at: http://developer.authorize.net
         );
@@ -173,7 +177,7 @@ class Payment extends BaseClass
         $response_array = explode($post_values["x_delim_char"],$post_response);
         $this->DestroyTransaction();
         //return $iRetval;
-        return $post_response;
+        return $post_response[0];
     }
 
     /**

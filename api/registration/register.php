@@ -175,10 +175,13 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // Get the payment info from the request.
             
             // Payment Info
-            $oRegistration->oPayment->dAmount = $dPrice;
-            
+            $oRegistration->oPayment->dAmount = 1.00;
+            // UNCOMMENT THIS LINE WHEN RELEASING
+            //$oRegistration->oPayment->dAmount = $dPrice;
             $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_key.txt');
             $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_id.txt');
+            
+            $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
             
             // Time for payment information
             $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
@@ -187,7 +190,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $strAuthNetTransId,
                 $aPaymentValues["card-name"],
                 $aPaymentValues["card-number"],
-                "01/14", // TODO: IMPLEMENT!
+                $strCCExp,
                 $aPaymentValues["csc"]
                 );
 
