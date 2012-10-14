@@ -1,4 +1,4 @@
-<?php
+    <?php
 // Includes
 require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
 require_once (dirname(__FILE__) . "/inc/form.personal.func.inc");
@@ -90,7 +90,21 @@ echo var_dump($_SESSION);
                     echo "1";
                 }
             ?>
-            
+            </p>
+            <p><strong>Registration Type: </strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["registration-type"]))
+                {
+                    if ($aPersonalFormSessionData["registration-type"] === "family")
+                    {
+                        echo "$199";
+                    }
+                    else
+                    {
+                        echo "$89";
+                    }
+                }
+            ?>
             </p>
         </fieldset>
        <fieldset id="contact-info">

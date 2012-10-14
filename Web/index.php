@@ -305,7 +305,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
        </fieldset>
 
        <fieldset id="reference">
-       <h2>How Did You Hear About This Event</h2>
+       <h2>How Did You Hear About This Event?</h2>
          <ul>
          	<li>
             <input type="checkbox" class="reference-cbox"  id="radio" value="radio" name="radio" 
