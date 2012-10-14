@@ -20,7 +20,7 @@ $(document).ready(function() {
 																					},
 																					year : {
 																						required: true,
-																						minlength: 4,
+																						minlength: 2,
 																						digits: true
 																					},
 																					csc : {
@@ -40,7 +40,7 @@ $(document).ready(function() {
 																					},
 																					year : {
 																					  required: "Expiration Year is required",
-																						minlength: "Expiration Year must be 4 digits",
+																						minlength: "Expiration Year must be 2 digits",
 																						digits: "Expiration Year must be digits."
 																					},
 																					csc : {
