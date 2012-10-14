@@ -15,7 +15,7 @@ function setRegTypeOnChange() {
             + pad2(pID)
             + '"/>\r\n<!-- Age -->\r\n<select class="person-age" name="person-age-'
             + pad2(pID)
-            + '">\r\n<option value="1">Infant/Toddler (1-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
+            + '">\r\n<option value="1">Infant/Toddler (0-3)</option>\r\n<option value="2">Child (4-17)</option>\r\n<option value="3">Adult (18+)</option>\r\n</select>\r\n</li>\r\n';
     switch (intRegType) {
     case 0:
         ;

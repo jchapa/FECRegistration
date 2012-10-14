@@ -5,10 +5,10 @@ require_once (dirname(__FILE__) . "/inc/form.personal.func.inc");
 
 $strPersonalFormKey = "PERSONAL";
 $strPaymentFormKey = "PAYMENT";
-const PAYMENT_STATUS_DECLINED = 2;
-const PAYMENT_STATUS_ERROR = 3;
-const PAYMENT_STATUS_SUCCESS = 1;
-const PAYMENT_STATUS_PENDING = 0;
+$strPaymentStatusDeclined = 2;
+$strPaymentStatusError = 3;
+$strPaymentStatusSuccess = 1;
+$strPaymentStatusPending = 0;
 
 // Pickup our session
 $bSessionStarted = LoadSession();
@@ -62,6 +62,37 @@ echo var_dump($_SESSION);
   
 		
     <form id="billing-info" action="/api/registration/register.php" class="fec-form">
+        <fieldset id="contact-info">
+            <h2>Registration Summary</h2>
+            <p><strong>Registration Type: </strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["registration-type"]))
+                {
+                    if ($aPersonalFormSessionData["registration-type"] === "family")
+                    {
+                        echo "Family";
+                    }
+                    else
+                    {
+                        echo "Individual";
+                    }
+                }
+            ?>
+            </p>
+            <p><strong>Number of Attendees</strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["number-of-attendees"]))
+                {
+                    echo $aPersonalFormSessionData["number-of-attendees"];
+                }
+                else
+                {
+                    echo "1";
+                }
+            ?>
+            
+            </p>
+        </fieldset>
        <fieldset id="contact-info">
          <h2>Billing Information</h2>
          <ul>
