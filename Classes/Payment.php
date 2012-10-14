@@ -23,6 +23,7 @@ class Payment extends BaseClass
     const PAYMENT_STATUS_DECLINED = 2;
     const PAYMENT_STATUS_ERROR = 3;
     const PAYMENT_STATUS_SUCCESS = 1;
+    const PAYMENT_STATUS_PENDING = 0;
 
     const AUTH_NET_TRANSACTION_ID = "";
     const AUTH_NET_TRANSACTION_KEY = "";
