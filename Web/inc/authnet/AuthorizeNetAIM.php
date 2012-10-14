@@ -31,7 +31,7 @@
  * @subpackage AuthorizeNetAIM
  * @link       http://www.authorize.net/support/AIM_guide.pdf AIM Guide
  */
-
+define("AUTHORIZENET_SANDBOX", false);
 require_once (dirname(__FILE__) . "/shared/AuthorizeNetRequest.php");
 require_once (dirname(__FILE__) . "/shared/AuthorizeNetResponse.php");
 require_once (dirname(__FILE__) . "/shared/AuthorizeNetTypes.php");
