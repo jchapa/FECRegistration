@@ -5,6 +5,10 @@ require_once (dirname(__FILE__) . "/inc/form.personal.func.inc");
 
 $strPersonalFormKey = "PERSONAL";
 $strPaymentFormKey = "PAYMENT";
+const PAYMENT_STATUS_DECLINED = 2;
+const PAYMENT_STATUS_ERROR = 3;
+const PAYMENT_STATUS_SUCCESS = 1;
+const PAYMENT_STATUS_PENDING = 0;
 
 // Pickup our session
 $bSessionStarted = LoadSession();

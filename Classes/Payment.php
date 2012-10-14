@@ -59,45 +59,9 @@ class Payment extends BaseClass
         )
     {
         $this->CreateTransaction($strCardName, $strCardNumber, $strCardExp, $strCardCVV);
-        
-        $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_PENDING;
-        
-        /*$oAuthNetAPI = new AuthorizeNetAIM($strAuthNetTransId, $strAuthNetTransKey);
-        $aCardName = explode(' ', $this->strCardName);
-        $strLastName = array_pop($aCardName);
-        $strFirstName = implode(" ", $aCardName);
-        $oAuthNetAPI->setFields(
-            array(
-            'amount' => '1', // Hard coded for now
-            'card_num' => $this->strCardNumber,
-            'exp_date' => $this->strCardExp,
-            'first_name' => $strFirstName,
-            'last_name' => $strLastName,
-            'address' => $oRegistration->strBillingAddress1 . ' ' .
-                $oRegistration->strBillingAddress2,
-            'city' => $oRegistration->strBillingCity,
-            'state' => $oRegistration->strBillingState,
-            'zip' => $oRegistration->strBillingZip,
-            'phone' => $oRegistration->strBillingPhone,
-            'email' => $oRegistration->strBillingEmail,
-            'invoice_num' => 'FEC2013-01', // We really need config. . .
-            'tran_key' => $strAuthNetTransKey,
-            'trans_id' => $strAuthNetTransId
-            )
-        );
-        
-        $oResponse= $oAuthNetAPI->authorizeAndCapture();
-        if ($oResponse->approved)
-        {
-            $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_SUCCESS;
-        }
-        else
-        {
-            // Something broke - we could add more statuses for reasons, though. . .
-            $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_DECLINED;
-        }
 
-        */
+        $iRetval = $this->iPaymentStatus = self::PAYMENT_STATUS_PENDING;
+
         $post_url = "https://secure.authorize.net/gateway/transact.dll";
         $strAuthNetTransId = trim($strAuthNetTransId);
         $strAuthNetTransKey = trim($strAuthNetTransKey);
@@ -105,34 +69,33 @@ class Payment extends BaseClass
         $strLastName = array_pop($aCardName);
         $strFirstName = implode(" ", $aCardName);
         $post_values = array(
-        
-                // the API Login ID and Transaction Key must be replaced with valid values
-                "x_login"			=> $strAuthNetTransId,
-                "x_tran_key"		=> $strAuthNetTransKey,
-        
-                "x_version"			=> "3.1",
-                "x_delim_data"		=> "TRUE",
-                "x_delim_char"		=> "|",
-                "x_relay_response"	=> "FALSE",
-        
-                "x_type"			=> "AUTH_CAPTURE",
-                "x_method"			=> "CC",
-                "x_card_num"		=> $this->strCardNumber,
-                "x_exp_date"		=> $this->strCardExp,
-        
-                "x_amount"			=> $this->dAmount,
-                "x_invoice_num"		=> "FEC2012-01",
-        
-                "x_first_name"		=> $strFirstName,
-                "x_last_name"		=> $strLastName,
-                "x_address"			=> $oRegistration->strBillingAddress1 . " " . $oRegistration->strBillingAddress2,
-                "x_city"            => $oRegistration->strBillingCity,
-                "x_state"			=> $oRegistration->strBillingState,
-                "x_zip"				=> $oRegistration->strBillingZip,
-                "x_phone"           => $oRegistration->strBillingPhone,
-                "x_email"           => $oRegistration->strBillingEmail
-                // Additional fields can be added here as outlined in the AIM integration
-                // guide at: http://developer.authorize.net
+            // the API Login ID and Transaction Key must be replaced with valid values
+            "x_login"			=> $strAuthNetTransId,
+            "x_tran_key"		=> $strAuthNetTransKey,
+    
+            "x_version"			=> "3.1",
+            "x_delim_data"		=> "TRUE",
+            "x_delim_char"		=> "|",
+            "x_relay_response"	=> "FALSE",
+    
+            "x_type"			=> "AUTH_CAPTURE",
+            "x_method"			=> "CC",
+            "x_card_num"		=> $this->strCardNumber,
+            "x_exp_date"		=> $this->strCardExp,
+    
+            "x_amount"			=> $this->dAmount,
+            "x_invoice_num"		=> "FEC2012-01",
+    
+            "x_first_name"		=> $strFirstName,
+            "x_last_name"		=> $strLastName,
+            "x_address"			=> $oRegistration->strBillingAddress1 . " " . $oRegistration->strBillingAddress2,
+            "x_city"            => $oRegistration->strBillingCity,
+            "x_state"			=> $oRegistration->strBillingState,
+            "x_zip"				=> $oRegistration->strBillingZip,
+            "x_phone"           => $oRegistration->strBillingPhone,
+            "x_email"           => $oRegistration->strBillingEmail
+            // Additional fields can be added here as outlined in the AIM integration
+            // guide at: http://developer.authorize.net
         );
         
         // This section takes the input fields and converts them to the proper format
