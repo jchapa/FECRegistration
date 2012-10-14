@@ -108,19 +108,19 @@ $(document)
                         $("#number-of-attendees")[0].selectedIndex = 0;
                         $("select#registration-type")[0].selectedIndex = 0;
                     } else {
-                        var attNum = document
-                                .getElementById("attendee-num-var");
-                        if (x) {
-                            $("select#registration-type").change(
-                                    setRegTypeOnChange);
-                            $("select#number-of-attendees").change(
-                                    setNumOfAttOnChange);
-                        } else {
-                            $("select#registration-type").change(
-                                    setRegTypeOnChange);
-                            $("select#number-of-attendees").change(
-                                    setNumOfAttOnChange(x));
-                        }
+                        var attNum = document.getElementById("attendee-num-var");
+												var regType = document.getElementById("registration-type").value;
+												if (regType === "family") {
+													if (attNum) {
+															$("select#registration-type").change(setRegTypeOnChange);
+															$("select#number-of-attendees").change(setNumOfAttOnChange(attNum));
+													} else {
+															$("select#registration-type").change(setRegTypeOnChange);
+															$("select#number-of-attendees").change(setNumOfAttOnChange(1));
+													}
+												} else {
+													setRegTypeOnChange();
+												}
                     }
 
                     // Registration Change function.
@@ -321,17 +321,6 @@ $(document)
                                         errorLabelContainer : "#error-label-container"
                                     });
 
-                    // Payment page Scripts
 
-                    $(".same-as-contact").click(
-                            function() {
-                                if (this.checked) {
-                                    $(".contact-duplicate").attr('disabled',
-                                            true);
-                                } else {
-                                    $(".contact-duplicate").removeAttr(
-                                            'disabled', true);
-                                }
-                            });
 
                 });

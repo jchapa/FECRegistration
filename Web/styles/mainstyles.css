@@ -966,6 +966,7 @@ span#attendee-total
 label.error
 {
 	color:#F00;
+	margin-bottom:8px;
 }
 
 #error-container
@@ -977,13 +978,15 @@ label.error
 	background:url(../images/arrow.png) center left;	
 	background-repeat:no-repeat;
 	margin-right:-493px;
+
 }
 
 #error-label-container
 {
 	width:280px;
-	background:white;
+	background:#fff;
 	float:right;
+	border-radius:5px;
 }
 
 
