@@ -9,6 +9,7 @@
 
 
 <link rel="stylesheet" type="text/css" media="all" href="styles/mainstyles.css" />
+<link rel="stylesheet" type="text/css" media="all" href="styles/jquery.bt.css" />
 <link rel="icon" href="http://www.familyeconomics.com/wp-content/themes/family-economics/images/favicon.png" type="image/png">
 
 <script src="http://www.familyeconomics.com/wp-content/themes/family-economics/js/jquery.js" type="text/javascript"></script>
@@ -17,6 +18,7 @@
 <script src="http://malsup.github.com/jquery.form.js"></script>
 <script src="scripts/jquery.easing.1.3.js"></script>
 <script src="scripts/stickysidebar.jquery.min.js"></script>
+<script src="scripts/jquery.bt.min.js"></script>
 
 <link rel="pingback" href="http://www.familyeconomics.com/xmlrpc.php" />
 

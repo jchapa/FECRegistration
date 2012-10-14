@@ -994,3 +994,16 @@ label.error
 	width:125px;
 	float:left;
 }
+
+#reg-detail
+{
+	display:inline-block;
+}
+
+#reg-detail span
+{
+	font-weight:bold;
+	text-decoration:underline;
+	font-size:14px;
+	cursor:pointer;
+}
