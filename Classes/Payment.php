@@ -100,7 +100,8 @@ class Payment extends BaseClass
         unset($oAuthNetAPI, $aCardName, $strLastName, $strFirstName, $strAuthNetId, $strAuthNetKey);
         */
         $post_url = "https://test.authorize.net/gateway/transact.dll";
-        
+        $strAuthNetTransId = trim($strAuthNetTransId);
+        $strAuthNetTransKey = trim($strAuthNetTransKey);
         $post_values = array(
         
                 // the API Login ID and Transaction Key must be replaced with valid values
