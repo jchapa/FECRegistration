@@ -308,6 +308,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
     {
         $strTo = $oRegistration->strContactEmail . ", registration@familyeconomics.com";
         $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
+        $strHeaders .= "Content-type: text/html\r\n";
         $strSubject = "Registration Confirmation - Family Economics 2013 - MO";
         $strRetval = $this->GetEmailHeader();
         $strRetval .= <<<EOF
@@ -343,7 +344,7 @@ EOF;
         {
             $strRetval .= <<<EOF
             <p>
-            {$oFamilyM->$strFirstName} {$oFamilyM->$strLastName}
+            {$oFamilyM->strFirstName} {$oFamilyM->strLastName}
             </p>
 EOF;
         }
@@ -390,6 +391,7 @@ EOF;
     {
         $strTo = $oRegistration->strBillingEmail . ", registration@familyeconomics.com";
         $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
+        $strHeaders .= "Content-type: text/html\r\n";
         $strSubject = "Registration Billing Confirmation - Family Economics 2013 - MO";
         $strRetval = $this->GetEmailHeader();
         $strRetval .= <<<EOF
