@@ -301,7 +301,13 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
          */
         
         // First let's send the registration email(s)
-        $bRegEmail = $this->SendRegistrantEmail($oRegistration);
+        $bIncludePayment = true;
+        if ($oRegistration->strBillingAddress1 != $oRegistration->strContactAddress1)
+        {
+            // Send diff conf email to biller
+            $bIncludePayment = false;
+        }
+        $bRegEmail = $this->SendRegistrantEmail($oRegistration, $bIncludePayment);
     }
     
     private function SendRegistrantEmail(Registration $oRegistration, $bIncludePayment)
