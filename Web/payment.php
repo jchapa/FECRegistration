@@ -38,7 +38,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
 <script type="text/javascript" src="scripts/payment-functions.js"></script>
 
 <?php 
-echo var_dump($_SESSION);
+//echo var_dump($_SESSION);
 ?>
 <div id="header">
 	<div id="header-container">

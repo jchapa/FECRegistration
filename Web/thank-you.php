@@ -3,7 +3,7 @@
 require_once (dirname(__FILE__) . "/inc/session.form.func.inc");
 
 //Debug - SET TO FALSE FOR PRODUCTION
-$bDebug = true;
+$bDebug = false;
 
 // First let's kick off our session
 LoadSession();
