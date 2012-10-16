@@ -240,16 +240,14 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // Payment Info
             $oRegistration->oPayment->dAmount = 1.00;
             // UNCOMMENT THE TWO FOLLOWING LINES WHEN RELEASING
-            //$oRegistration->oPayment->dAmount = $dPrice;
-            //$oRegistration->oPayment->dAmount = $dPrice - $iDiscount;
+            $oRegistration->oPayment->dAmount = $dPrice;
+            $oRegistration->oPayment->dAmount = $dPrice - $iDiscount;
             $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_key.config');
             $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_id.config');
             
             $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
             
             // Time for payment information
-            if (1==2)
-            {
             $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
                 $oRegistration,
                 $strAuthNetTransKey,
@@ -259,11 +257,6 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $strCCExp,
                 $aPaymentValues["csc"]
                 );
-            }
-            else
-            {
-                $iPaymentFlag = 1;
-            }
             // Here we determine what happened, and output it.
             $strRetval = json_encode(array("result" => $iPaymentFlag));
             
