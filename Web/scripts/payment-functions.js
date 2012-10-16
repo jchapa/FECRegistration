@@ -65,12 +65,12 @@ $(document).ready(function() {
         else if (response.result == "2")
             {
                 $("#error-container").show();
-                $("#error-container").html('<label class="error">Your Transaction Was Declined. Please Try Again</label>');
+                $("#error-container").html('<div id="error-label-container"><label class="error">Your Transaction Was Declined. Please Try Again</label></div>');
             }
         else
             {
                 $("#error-container").show();
-                $("#error-container").html('<label class="error">There Was a Problem Processing Your Transaction. Please Give Us a Call</label>');
+                $("#error-container").html('<div id="error-label-container"><label class="error">There Was a Problem Processing Your Transaction. Please Give Us a Call</label></div>');
             }
         }
     });
