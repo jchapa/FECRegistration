@@ -54,7 +54,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 
 <div id="container">
 
-  <h2 class="entrytitle">2013 Family Economics Registration</h2>
+  <h2 class="entrytitle">May 2013 St. Louis Family Economics Registration</h2>
   <!-- Attendees -->
   <div id="content" class="column">
 
@@ -77,36 +77,49 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 				?>
        " id="attendee-num-var" />
       <div id="registration-info-types">
+       <div style="clear:both; margin-top:20px; margin-bottom:10px">
+                  <span>
+                      <strong>Family Rate</strong> (includes immediate family): 
+                      <span style="text-decoration:line-through">Regular Price: $299</span> Early Bird Discount: $199
+                  </span>
+                  <br />
+                  <span>
+                      <strong>Individual Rate</strong>: 
+                      <span style="text-decoration:line-through">Early Bird Discount: $89</span> Early Bird Discount: $89
+                  </span>
+              </div>
         <fieldset id="registration-info-dds">
           <ul id="registration-setup">
+            <li style="clear:both">
+             
+            </li>
             <li id="reg-type-li">
               <label for="registration-type">Registration Type</label>
-              <select id="registration-type" name="registration-type">
-                <option value="0">- Please Select -</option>
-                <option value="family"
-                <?php 
-                    if (isset($aPersonalFormSessionData["registration-type"]))
-                    {
-                        if ($aPersonalFormSessionData["registration-type"] === "family")
-                        {
-                            echo "selected=\"selected\"";
-                        }
-                    }
-                ?>
-                >Family</option>
-                <option value="individual"
-                <?php 
-                    if (isset($aPersonalFormSessionData["registration-type"]))
-                    {
-                        if ($aPersonalFormSessionData["registration-type"] === "individual")
-                        {
-                            echo "selected=\"selected\"";
-                        }
-                    }
-                ?>
-                >Individual</option>
-              </select>
-              <div id="reg-detail" title="Family Rate includes immediate family" class="target"><span>?</span></div>
+              <select id="registration-type" name="registration-type"
+				style="clear: both">
+					<option value="0">- Please Select -</option>
+					<option value="family"
+					<?php
+					if (isset($aPersonalFormSessionData["registration-type"]))
+					{
+					    if ($aPersonalFormSessionData["registration-type"] === "family")
+					    {
+					        echo "selected=\"selected\"";
+					    }
+					}
+					?>>Family</option>
+					<option value="individual"
+					<?php
+					if (isset($aPersonalFormSessionData["registration-type"]))
+					{
+					    if ($aPersonalFormSessionData["registration-type"] === "individual")
+					    {
+					        echo "selected=\"selected\"";
+					    }
+					}
+					?>>Individual</option>
+			</select>
+				<div id="reg-detail" title="Family Rate includes immediate family" class="target"><span>?</span></div>
             </li>
 
             <li id="attendee-num-li">
@@ -137,8 +150,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
           <span class="regular-price"></span>
           <span class="early-pricing"></span> 
         </fieldset>
-
-       <h2>Attendee Information</h2>
+       <h2 style="clear:both;">Attendee Information</h2>
 
        <fieldset id="person-information">
          <ul id="person-information-list">
@@ -166,7 +178,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
              }
          ?>
          /> I plan to attend all four days <br />
-         <span>OR</span><br />
+         <span>OR (check all that apply)</span><br />
          <input type="checkbox" name="select-days" class="select-days" value="weds" 
          <?php
              if (false !== strpos($aPersonalFormSessionData["select-days"], "weds"))
