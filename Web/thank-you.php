@@ -14,6 +14,9 @@ $strPersonalFormKey = "PERSONAL";
 // Let's get any current session info
 $aPersonalFormSessionData = GetFormSessionData($strPersonalFormKey);
 
+// Bye bye session
+session_destroy();
+
 ?>
 
 <?php
