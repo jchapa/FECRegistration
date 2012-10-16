@@ -60,7 +60,7 @@ $(document).ready(function() {
             if (response.result == "1")
             {
                 // yay! it worked. Send them along. . .
-                window.location("thank-you.php");
+                window.location = "thank-you.php";
             }
         else if (response.result == "2")
             {
