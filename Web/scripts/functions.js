@@ -99,8 +99,7 @@ function setNumOfAttOnChange() {
 
 }
 
-$(document)
-        .ready(
+$(document).ready(
                 function() {
                     if (document.getElementById("wizardry").value != "bam") {
 
@@ -182,20 +181,17 @@ $(document)
                     });
 
                     // Add Methods/Class rules for Names
-                    $.validator
-                            .addMethod("fNameRequired",
+                    $.validator.addMethod("fNameRequired",
                                     $.validator.methods.required,
                                     "First Name Required");
-                    $.validator
-                            .addMethod(
+                    $.validator.addMethod(
                                     "fNameMinlength",
                                     $.validator.methods.minlength,
                                     $
                                             .format("First Name must have at least {0} characters"));
                     $.validator.addMethod("lNameRequired",
                             $.validator.methods.required, "Last Name Required");
-                    $.validator
-                            .addMethod(
+                    $.validator.addMethod(
                                     "lNameMinlength",
                                     $.validator.methods.minlength,
                                     $
@@ -220,8 +216,7 @@ $(document)
                     $("#error-container").stickySidebar();
 
                     // validate Form
-                    var validate = $("#registration-details")
-                            .validate(
+                    var validate = $("#registration-details").validate(
                                     {
                                         debug : false,
                                         rules : {
