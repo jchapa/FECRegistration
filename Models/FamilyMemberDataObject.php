@@ -16,16 +16,23 @@ class FamilyMemberDataObject extends CoreDataObject
             );
     }
 
-    public function AddFamilyMember($oFamilyMember)
+    public function AddFamilyMember(FamilyMember $oFamilyMember)
     {
-        $strQuery = "insert into FAMILY_MEMBER (" .
-            "firstName, lastName)" .
-            "values (" .
-            $oFamilyMember->strFirstName . ", " .
-            $oFamilyMember->strLastName . ");";
+        $strQuery = $this->GetAddFamilyMemberSQL($oFamilyMember);
         $oRetval = parent::DoQueries(array($strQuery));
         unset($strQuery);
         return $oRetval;
+    }
+    
+    public function GetAddFamilyMemberSQL(FamilyMember $oFamilyMember)
+    {
+        $strRetval = "insert into FAMILY_MEMBER (" . 
+            "family_id, first_name, last_name, age) values ('" .
+            $oFamilyMember->oFamily->iFamilyId . "', '" . 
+            $this->CleanUpParameter($oFamilyMember->strFirstName) . "', '" .
+            $this->CleanUpParameter($oFamilyMember->strLastName) . "', '" .
+            $this->CleanUpParameter($oFamilyMember->strAge) . "');";
+        return $strRetval;
     }
 
     public function UpdateFamilyMember($oFamilyMember)

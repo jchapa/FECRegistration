@@ -2,11 +2,11 @@
 class Family extends BaseClass
 {
     // Pull in our objects
-    protected $aFamilyMembers = array();
+    public $aFamilyMembers = array();
 
     // Define our scalars
-    protected $iFamilyId;
-    protected $strFamilyName;
+    public $iFamilyId;
+    public $strFamilyName;
 
     public function __construct()
     {

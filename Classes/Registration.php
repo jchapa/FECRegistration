@@ -18,6 +18,8 @@ class Registration extends BaseClass
     public $bAttendingThursday;
     public $bAttendingFriday;
     public $bAttendingSaturday;
+    
+    public $bIsComplete;
 
     // This really should be normalized, but I don't have time this 1 AM. . .
     public $strContactAddress1;

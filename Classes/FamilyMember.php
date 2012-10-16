@@ -5,7 +5,7 @@ class FamilyMember extends BaseClass
     public $oFamily;
 
     // Define our scalars
-    protected $iFamilyMemberId;
+    public $iFamilyMemberId;
     public $strFirstName;
     public $strLastName;
     public $strAge;

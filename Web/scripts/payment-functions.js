@@ -67,6 +67,12 @@ $(document).ready(function() {
                 $("#error-container").show();
                 $("#error-container").html('<div id="error-label-container"><label class="error">Your Transaction Was Declined. Please Try Again</label></div>');
             }
+        else if(response.result == "4")
+            {
+            $("#error-container").show();
+            $("#error-container").html('<div id="error-label-container"><label class="error">Invalid Coupon!</label></div>');
+
+            }
         else
             {
                 $("#error-container").show();
@@ -75,9 +81,6 @@ $(document).ready(function() {
         }
     });
 
-    var validate = 
-
-    $("error-container").hide();
     $("#error-container").stickySidebar();
 
     $("#same-as-contact").click(function() {

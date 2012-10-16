@@ -4,10 +4,10 @@ require_once (dirname(__FILE__) . "/../Web/inc/authnet/AuthorizeNetAIM.php");
 class Payment extends BaseClass
 {
     // Pull in our objects
-    protected $oFamily;
+    public $oFamily;
 
     // Pull in our scalars
-    protected $iPaymentId;
+    public $iPaymentId;
     public $dAmount;
     public $iPaymentStatus;
 

@@ -1,4 +1,6 @@
 <?php
+require_once (dirname(__FILE__) . "/FamilyMemberDataObject.php");
+
 class FamilyDataObject extends CoreDataObject
 {
     public function __construct(
@@ -16,15 +18,40 @@ class FamilyDataObject extends CoreDataObject
             );
     }
 
-    public function AddFamily($oFamily)
+    // Gets a family and returns its ID
+    public function AddFamily(Family &$oFamily)
     {
-        $strQuery = "insert into FAMILY (" .
-            "familyName)" .
-            "values (" .
-            $oFamily->strFamilyName . ");";
-        $oRetval = parent::DoQueries(array($strQuery));
-        unset($strQuery);
-        return $oRetval;
+        
+        $strQuery = $this->GetAddFamilySQL($oFamily);
+        $oResponse = parent::DoQueries(array($strQuery));
+        unset($strQuery, $oResponse);
+        
+        $strRetval = parent::GetLastInsertID();
+        $oFamily->iFamilyId = $strRetval;
+        
+        // Do we have any family members?
+        foreach ($oFamily->aFamilyMembers as &$oFamilyMember)
+        {
+            $oFamilyMemberData = new FamilyMemberDataObject(
+                    $this->m_dbHost,
+                    $this->m_dbName,
+                    $this->m_dbUser,
+                    $this->m_dbPass
+                );
+            $oFamilyMember->oFamily = $oFamily;
+            $oFamilyMemberData->AddFamilyMember($oFamilyMember);
+            $oFamilyMember->iFamilyMemberId = parent::GetLastInsertID();
+            unset ($oFamilyMember);
+        }
+        
+        return $strRetval;
+    }
+    
+    public function GetAddFamilySQL(Family $oFamily)
+    {
+        $strRetval = "insert into FAMILY (`name`)" .
+            "values ('" . $this->CleanUpParameter($oFamily->strFamilyName) . "');";
+        return $strRetval;
     }
 
     public function UpdateFamily($oFamily)

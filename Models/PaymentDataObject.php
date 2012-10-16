@@ -16,17 +16,24 @@ class PaymentDataObject extends CoreDataObject
             );
     }
 
-    public function AddPayment($oPayment)
+    public function AddPayment(Payment &$oPayment)
     {
-        $strQuery = "insert into PAYMENT (" .
-            "familyId, amount, status)" .
-            "values (" .
-            $oPayment->oFamily->iFamilyId . ", " .
-            $oPayment->dAmount . ", " .
-            $oPayment->iPaymentStatus .  ");";
+        $strQuery = $this->GetAddPaymentSQL($oPayment);
         $oRetval = parent::DoQueries(array($strQuery));
-        unset($strQuery);
+        $iPaymentId = parent::GetLastInsertID();
+        $oPayment->iPaymentId = $iPaymentId;
+        unset($strQuery, $iPaymentId);
         return $oRetval;
+    }
+    
+    public function GetAddPaymentSQL(Payment $oPayment)
+    {
+        $strRetval = "insert into PAYMENT (" .
+            "`family_id`, `amount`, `status`) values ('" . 
+            $oPayment->oFamily->iFamilyId . "', '" .
+            $oPayment->dAmount . "', '" .
+            $oPayment->iPaymentStatus . "');";
+        return $strRetval;
     }
 
     public function UpdatePayment($oPayment)

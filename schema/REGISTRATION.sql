@@ -24,9 +24,9 @@ billing_phone varchar(255),
 billing_alt_phone varchar(255),
 billing_email varchar(255),
 referral varchar(255),
-is_complete int NOT NULL
+is_complete int NOT NULL,
 PRIMARY KEY (registration_id),
 FOREIGN KEY (family_id) REFERENCES FAMILY(family_id),
 FOREIGN KEY (payment_id) REFERENCES PAYMENT(payment_id),
 FOREIGN KEY (coupon_id) REFERENCES COUPON(coupon_id)
-)
+);
