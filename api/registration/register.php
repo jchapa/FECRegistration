@@ -248,6 +248,8 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
             
             // Time for payment information
+            if (1==2)
+            {
             $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
                 $oRegistration,
                 $strAuthNetTransKey,
@@ -257,6 +259,11 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $strCCExp,
                 $aPaymentValues["csc"]
                 );
+            }
+            else
+            {
+                $iPaymentFlag = 1;
+            }
             // Here we determine what happened, and output it.
             $strRetval = json_encode(array("result" => $iPaymentFlag));
             
@@ -371,12 +378,6 @@ EOF;
             an email to let us know. You can reach us at
             <a href="mailto:registration@familyeconomics.com">registration@familyeconomics.com</a>.
         </p>
-        <p>
-            See you in May!
-        </p>
-        <p>
-            The Generations with Vision Team
-        </p>
 EOF;
         $strRetval .= $this->GetEmailFooter();
         mail($strTo, $strSubject, $strRetval, $strHeaders);
@@ -427,6 +428,12 @@ EOF;
     private function GetEmailFooter()
     {
         return <<<EOF
+        <p>
+            See you in May!
+        </p>
+        <p>
+            The Generations with Vision Team
+        </p>
     </body>
 </html>
 EOF;
