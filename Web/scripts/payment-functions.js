@@ -7,7 +7,6 @@ $(document).ready(function() {
     $("#billing-info").ajaxForm({
         beforeSubmit:function()
         {
-            $("#error-container").empty();
             $("#billing-info").validate({
                 debug : false,
                 rules : {
@@ -54,6 +53,7 @@ $(document).ready(function() {
                 errorContainer : "#error-container",
                 errorLabelContainer : "#error-label-container"
             });
+            return $("#billing-info").valid();
         },
         success: function(response)
         {
