@@ -64,11 +64,13 @@ $(document).ready(function() {
             }
         else if (response.result == "2")
             {
+                $("#error-container").show();
                 $("#error-container").html('<label class="error">Your Transaction Was Declined. Please Try Again</label>');
             }
         else
             {
-            $("#error-container").html('<label class="error">There Was a Problem Processing Your Transaction. Please Give Us a Call</label>');
+                $("#error-container").show();
+                $("#error-container").html('<label class="error">There Was a Problem Processing Your Transaction. Please Give Us a Call</label>');
             }
         }
     });
