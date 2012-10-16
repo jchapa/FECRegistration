@@ -79,7 +79,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
             </p>
             <p><strong>Number of Attendees: </strong>
             <?php 
-                if (isset($aPersonalFormSessionData["number-of-attendees"]))
+                if (isset($aPersonalFormSessionData["number-of-attendees"]) && !empty($aPersonalFormSessionData["number-of-attendees"]))
                 {
                     echo $aPersonalFormSessionData["number-of-attendees"];
                 }
