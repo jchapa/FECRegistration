@@ -57,12 +57,12 @@ $(document).ready(function() {
         },
         success: function(response)
         {
-            if (response == "1")
+            if (response.result == "1")
             {
                 // yay! it worked. Send them along. . .
                 window.location("thank-you.php");
             }
-        else if (response == "2")
+        else if (response.result == "2")
             {
                 $("#error-container").html('<label class="error">Your Transaction Was Declined. Please Try Again</label>');
             }
