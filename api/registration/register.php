@@ -278,11 +278,150 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 );
             $oRegistrationDataContext->AddRegistration($oRegistration);
             
+            if ($iPaymentFlag == "1")
+            {
+                $this->SendEmailConfirmations($oRegistration);
+            }
+            
             // Output the response
             $this->SendResponse($strRetval);
             //unset($stuff, $andThings);
             exit;
         }
+    }
+    protected function SendEmailConfirmations(Registration $oRegistration)
+    {
+        // time to send an email!
+        
+        /*
+         * We send three confirmations
+         * 1) to the registrant (with their contact email address)
+         * 2) to the guy was paid for it (if different from registrant - yes, we're that cool)
+         * 3) To the cool FEC people (jack, megan, chad at this point)
+         */
+        
+        // First let's send the registration email(s)
+        $bRegEmail = $this->SendRegistrantEmail($oRegistration);
+    }
+    
+    private function SendRegistrantEmail(Registration $oRegistration, $bIncludePayment)
+    {
+        $strTo = $oRegistration->strContactEmail . ", registration@familyeconomics.com";
+        $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
+        $strSubject = "Registration Confirmation - Family Economics 2013 - MO";
+        $strRetval = $this->GetEmailHeader();
+        $strRetval .= <<<EOF
+        <h2 style="color:#00A9E9">Registration Confirmation</h2>
+        <p>You are successfully registered for the 2013 Family Economics Conference!
+        We look forward to having you join us in May as we cast a vision for 
+        family economics.</p>
+EOF;
+        if ($bIncludePayment)
+        {
+            $strRetval .= $this->AddPaymentInfo($oRegistration);
+        }
+        else
+        {
+            $this->SendPaymentEmail($oRegistration);
+        }
+        
+        if ($oRegistration->strRegistrationType == "individual")
+        {
+            $strRetval .= <<<EOF
+        <p>We will have your name badge prepared. Here is how it will appear:</p>
+EOF;
+        }
+        else 
+        {
+            $strRetval .= <<<EOF
+        <p>We will have your name badges prepared for the following registrants:</p>
+        <br />
+EOF;
+        }
+        
+        foreach ($oRegistration->oFamily->aFamilyMembers as $oFamilyM)
+        {
+            $strRetval .= <<<EOF
+            <p>
+            {$oFamilyM->$strFirstName} {$oFamilyM->$strLastName}
+            </p>
+EOF;
+        }
+        
+        $strRetval .= <<<EOF
+        <br />
+        <p>Here is the contact information we have on file for you:</p>
+        <p><strong>Email Address:</strong> {$oRegistration->strContactEmail}</p>
+        <p><strong>Phone Number:</strong> {$oRegistration->strContactPhone}</p>
+        <p><strong>Address:</strong> {$oRegistration->strContactAddress1}</p>
+        <p><strong>Address+:</strong> {$oRegistration->strContactAddress2}</p>
+        <p><strong>City:</strong> {$oRegistration->strContactCity}</p>
+        <p><strong>State:</strong> {$oRegistration->strContactState}</p>
+        <p><strong>Zip:</strong> {$oRegistration->strContactZip}</p>
+        <br />
+        <p>
+            If you need to change anything or have any questions, just send us 
+            an email to let us know. You can reach us at
+            <a href="mailto:registration@familyeconomics.com">registration@familyeconomics.com</a>.
+        </p>
+        <p>
+            See you in May!
+        </p>
+        <p>
+            The Generations with Vision Team
+        </p>
+EOF;
+        $strRetval .= $this->GetEmailFooter();
+        mail($strTo, $strSubject, $strRetval, $strHeaders);
+        return $strRetval;
+    }
+    
+    private function AddPaymentInfo(Registration $oRegistration)
+    {
+        return <<<EOF
+        <p>Your card has been successfully charged &#36;{$oRegistration->oPayment->dAmount}</p>
+EOF;
+    }
+    
+    /**
+     * We only send this if billing and shipping emails differ
+     */
+    private function SendPaymentEmail(Registration $oRegistration)
+    {
+        $strTo = $oRegistration->strBillingEmail . ", registration@familyeconomics.com";
+        $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
+        $strSubject = "Registration Billing Confirmation - Family Economics 2013 - MO";
+        $strRetval = $this->GetEmailHeader();
+        $strRetval .= <<<EOF
+        <h2 style="color:#00A9E9">Registration Billing Confirmation</h2>
+        <p>Your registration payment for the 2013 Family Economics conference was successful</p>
+        <p>This is not a registration confirmation - that will arrive in a separate email,
+        as it was addressed on the first page of registration 
+        (your billing email address may have been different)</p>
+EOF;
+        $strRetval .= $this->AddPaymentInfo($oRegistration);
+        $strRetval .= $this->GetEmailFooter();
+        // Mail it!
+        mail ($strTo, $strSubject, $strRetval, $strHeaders);
+    }
+    
+    private function GetEmailHeader()
+    {
+        return <<<EOF
+<html>
+    <body>
+        <div style="background:#E4D30B">
+        <img src="http://www.familyeconomics.com/wp-content/themes/family-economics/images/logo.png" />
+        </div>
+EOF;
+    }
+    
+    private function GetEmailFooter()
+    {
+        return <<<EOF
+    </body>
+</html>
+EOF;
     }
 }
 
