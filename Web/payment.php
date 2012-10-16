@@ -49,9 +49,7 @@ echo var_dump($_SESSION);
     </div><!--End #nav-->	
 
 	</div><!--End #header-container-->
-</div><!--End #header-->	
-
- 
+</div><!--End #header-->
 
 
 <div id="container">
@@ -79,7 +77,7 @@ echo var_dump($_SESSION);
                 }
             ?>
             </p>
-            <p><strong>Number of Attendees</strong>
+            <p><strong>Number of Attendees: </strong>
             <?php 
                 if (isset($aPersonalFormSessionData["number-of-attendees"]))
                 {
