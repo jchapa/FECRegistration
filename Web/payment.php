@@ -60,51 +60,6 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
   
 		
     <form id="billing-info" action="/api/registration/register.php" class="fec-form">
-        <fieldset id="contact-info">
-            <h2>Registration Summary</h2>
-            <p><strong>Registration Type: </strong>
-            <?php 
-                if (isset($aPersonalFormSessionData["registration-type"]))
-                {
-                    if ($aPersonalFormSessionData["registration-type"] === "family")
-                    {
-                        echo "Family";
-                    }
-                    else
-                    {
-                        echo "Individual";
-                    }
-                }
-            ?>
-            </p>
-            <p><strong>Number of Attendees: </strong>
-            <?php 
-                if (isset($aPersonalFormSessionData["number-of-attendees"]) && !empty($aPersonalFormSessionData["number-of-attendees"]))
-                {
-                    echo $aPersonalFormSessionData["number-of-attendees"];
-                }
-                else
-                {
-                    echo "1";
-                }
-            ?>
-            </p>
-            <p><strong>Registration Cost: </strong>
-            <?php 
-                if (isset($aPersonalFormSessionData["registration-type"]))
-                {
-                    if ($aPersonalFormSessionData["registration-type"] === "family")
-                    {
-                        echo "$199";
-                    }
-                    else
-                    {
-                        echo "$89";
-                    }
-                }
-            ?>
-            </p>
-        </fieldset>
        <fieldset id="contact-info">
          <h2>Billing Information</h2>
          <ul>
@@ -255,13 +210,57 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
             </li>
             
             <li>
-              <label for="coupon">Referral Code</label>
+              <label for="coupon">Referral Code (will be automatically applied)</label>
               <input type="text" id="referral" name="referral" />
             </li>
             
          </ul>
        </fieldset>
-       
+               <fieldset id="contact-info">
+            <h2>Registration Summary</h2>
+            <p><strong>Registration Type: </strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["registration-type"]))
+                {
+                    if ($aPersonalFormSessionData["registration-type"] === "family")
+                    {
+                        echo "Family";
+                    }
+                    else
+                    {
+                        echo "Individual";
+                    }
+                }
+            ?>
+            </p>
+            <p><strong>Number of Attendees: </strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["number-of-attendees"]) && !empty($aPersonalFormSessionData["number-of-attendees"]))
+                {
+                    echo $aPersonalFormSessionData["number-of-attendees"];
+                }
+                else
+                {
+                    echo "1";
+                }
+            ?>
+            </p>
+            <p><strong>Registration Cost (sans coupons): </strong>
+            <?php 
+                if (isset($aPersonalFormSessionData["registration-type"]))
+                {
+                    if ($aPersonalFormSessionData["registration-type"] === "family")
+                    {
+                        echo "$199";
+                    }
+                    else
+                    {
+                        echo "$89";
+                    }
+                }
+            ?>
+            </p>
+        </fieldset>
        <fieldset id="submit">
          <input type="submit" id="btnSubmit" style="cursor:pointer;" value="Process Registration" /> (We will try to charge your card)
        </fieldset>
