@@ -210,7 +210,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
             </li>
             
             <li>
-              <label for="coupon">Referral Code (will be automatically applied)</label>
+              <label for="coupon">Referral Code (will be automatically applied after clicking "Process Registration" button below)</label>
               <input type="text" id="referral" name="referral" />
             </li>
             
@@ -245,7 +245,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
                 }
             ?>
             </p>
-            <p><strong>Registration Cost (sans coupons): </strong>
+            <p><strong>Registration Cost (any referral codes are not reflected in this total): </strong>
             <?php 
                 if (isset($aPersonalFormSessionData["registration-type"]))
                 {
