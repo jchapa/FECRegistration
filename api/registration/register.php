@@ -69,7 +69,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // What's it cost?
             if ($oRegistration->strRegistrationType === "individual")
             {
-                $dPrice = '79.00';
+                $dPrice = '89.00';
             }
             else
             {
