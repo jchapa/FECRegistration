@@ -49,13 +49,14 @@ class Payment extends BaseClass
     }
     
     public function ProcessTransaction(
-        Registration $oRegistration,
+        $oRegistration,
         $strAuthNetTransKey,
         $strAuthNetTransId,
         $strCardName,
         $strCardNumber,
         $strCardExp,
-        $strCardCVV
+        $strCardCVV,
+        $strInvoiceNum = "FEC2012-01"
         )
     {
         $this->CreateTransaction($strCardName, $strCardNumber, $strCardExp, $strCardCVV);
@@ -84,7 +85,7 @@ class Payment extends BaseClass
             "x_exp_date"		=> $this->strCardExp,
     
             "x_amount"			=> $this->dAmount,
-            "x_invoice_num"		=> "FEC2012-01",
+            "x_invoice_num"		=> $strInvoiceNum,
     
             "x_first_name"		=> $strFirstName,
             "x_last_name"		=> $strLastName,
