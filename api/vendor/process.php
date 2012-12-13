@@ -48,11 +48,13 @@ class ProcessVendorAPIPage extends BaseAPIPage
         {
             $oRegistration->iConferencePassType = "individual";
             $oRegistration->iConferencePassQty = substr($strPasses, strlen($strPasses));
+            file_put_contenets("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
         }
         else if (0 !== strpos($strPasses, "family"))
         {
             $oRegistration->iConferencePassType = "family";
             $oRegistration->iConferencePassQty = substr($strPasses, strlen($strPasses));
+            file_put_contenets("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
         }
         else if ($strPasses === 0)
         {
@@ -74,7 +76,18 @@ class ProcessVendorAPIPage extends BaseAPIPage
         $oRegistration->strBillingEmail = $aPaymentValues["email"];
         
         $dPrice = 1.00;
-        // UNCOMMENT NEXT TWO LNES WHEN RELEASING
+        // UNCOMMENT PAYMENT LOGIC WHEN RELEASING
+        $dPrice = 0.00;
+        $dPrice = $dPrice + ($oRegistration->iBigBooths * 340); // Big booths cost $340.00
+        $dPrice = $dPrice + ($oRegistration->iSmallBooths * 265); // Small booths cost $265.00
+        if ($oRegistration->iConferencePassType === "family")
+        {
+            $dPrice = $dPrice + 79;
+        }
+        else if ($oRegistration->iConferencePassType === "individual")
+        {
+            $dPrice = $dPrice + ($oRegistration->iConferencePassQty * 19);
+        }
         
         $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_key.config');
         $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_id.config');
