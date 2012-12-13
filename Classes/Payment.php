@@ -142,7 +142,7 @@ class Payment extends BaseClass
         $response_array = explode($post_values["x_delim_char"],$post_response);
         $this->DestroyTransaction();
         //return $iRetval;
-        file_put_contents("/home/familyeconomics/tmp.txt", var_dump($post_response));
+        //file_put_contents("/home/familyeconomics/tmp.txt", var_dump($post_response));
         return $post_response[0];
     }
 

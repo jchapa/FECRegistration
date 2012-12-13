@@ -81,8 +81,12 @@ class ProcessVendorAPIPage extends BaseAPIPage
         
         $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
         
+        $oPayment = new Payment();
+        
+        $oPayment->dAmount = $dPrice;
+        
         // Time for payment information
-        $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
+        $iPaymentFlag = $oPayment->ProcessTransaction(
                 $oRegistration,
                 $strAuthNetTransKey,
                 $strAuthNetTransId,
