@@ -28,7 +28,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
 
 	<div id="content" class="column">
 
-		<form action="/api/vendor/process.php" class="fec-form">
+		<form action="/api/vendor/process.php" class="fec-form" id="vendor-form">
 			<fieldset id="contact-info">
 			    <h2>Vendor Information</h2>
 				<ul>
