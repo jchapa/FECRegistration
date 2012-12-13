@@ -48,13 +48,13 @@ class ProcessVendorAPIPage extends BaseAPIPage
         {
             $oRegistration->iConferencePassType = "individual";
             $oRegistration->iConferencePassQty = substr($strPasses, strlen($strPasses));
-            file_put_contenets("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
+            file_put_contents("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
         }
         else if (0 !== strpos($strPasses, "family"))
         {
             $oRegistration->iConferencePassType = "family";
             $oRegistration->iConferencePassQty = substr($strPasses, strlen($strPasses));
-            file_put_contenets("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
+            file_put_contents("/home/familyeconomics/tmp.txt", $oRegistration->iConferencePassQty);
         }
         else if ($strPasses === 0)
         {
