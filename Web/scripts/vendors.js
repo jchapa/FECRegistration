@@ -50,3 +50,18 @@ function recalcVendorForm() {
 
     return '$' + total;
 }
+
+$("#vendor-form").ajaxForm({
+    success: function(response)
+    {
+        if (response.result == "1")
+            {
+                // yay! it worked. send them along. . .
+                window.location = "thank-you.php";
+            }
+        else{
+            // oh snap
+            alert("Something went wrong! Please check your info and try again.");
+        }
+    }
+});

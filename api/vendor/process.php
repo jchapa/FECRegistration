@@ -96,7 +96,8 @@ class ProcessVendorAPIPage extends BaseAPIPage
         // THIS NEEDS TO BE COMMENTED FOR RELEASE
         $dPrice = 1.00;
         
-        $oPayment->dAmount = $oRegistration->strTotal = $dPrice;
+        $oPayment->dAmount = $dPrice;
+        $oRegistration->strTotal = $dPrice;
         
         // Time for payment information
         $iPaymentFlag = $oPayment->ProcessTransaction(
@@ -167,6 +168,8 @@ EOF;
         <h3 style="color:#00A9E9">Booth Reservations</h3>
         <p><strong>Large Booths (10x10)</strong> x {$oRegistration->iBigBooths}</p>
         <p><strong>Small Booths (8x10)</strong> x {$oRegistration->iSmallBooths}</p>
+        <p><strong>Conference Pass</strong> x {$oRegistration->iConferencePassType}</p>
+        <p><strong>Additional Badges</strong> x {$oRegistration->iAdditionalBadges}</p>
         <p><strong>Grand Total:</strong> ${$oRegistration->strTotal}</p>
         <br />
         <p>
