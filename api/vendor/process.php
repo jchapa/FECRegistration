@@ -94,7 +94,7 @@ class ProcessVendorAPIPage extends BaseAPIPage
         
         $oPayment = new Payment();
         
-        $oPayment->dAmount = $dPrice;
+        $oPayment->dAmount = $oRegistration->strTotal = $dPrice;
         
         // Time for payment information
         $iPaymentFlag = $oPayment->ProcessTransaction(
@@ -109,10 +109,105 @@ class ProcessVendorAPIPage extends BaseAPIPage
         // Here we determine what happened, and output it.
         $strRetval = json_encode(array("result" => $iPaymentFlag));
         
+        if ($iPaymentFlag === "1")
+        {
+            $this->SendEmailConfirmations($oRegistration);
+        }
+        
         // Output the response
         $this->SendResponse($strRetval);
         //unset($stuff, $andThings);
         exit;
+    }
+    
+    protected function SendEmailConfirmations(VendorRegistration $oRegistration)
+    {
+        // time to send an email!
+    
+        /*
+         * We send three confirmations
+        * 1) to the registrant (with their billing! email address)
+        * 3) To the cool FEC people (jack, megan, chad at this point)
+        */
+    
+        // First let's send the registration email(s)
+        $bRegEmail = $this->SendRegistrantEmail($oRegistration);
+    }
+    
+    private function SendRegistrantEmail(VendorRegistration $oRegistration)
+    {
+        $strTo = $oRegistration->strRepEmail . ", " . $oRegistration->strAltEmail . ", registration@familyeconomics.com";
+        $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
+        $strHeaders .= "Content-type: text/html\r\n";
+        $strSubject = "Registration Confirmation - Family Economics 2013 - MO";
+        $strRetval = $this->GetEmailHeader();
+        $strRetval .= <<<EOF
+        <h2 style="color:#00A9E9">Vendor Registration Confirmation</h2>
+        <p>You are successfully registered as a vendor for the 2013 Family Economics Conference!
+        We look forward to having you join us in May as we cast a vision for
+        family economics.</p>
+EOF;
+        $strRetval .= <<<EOF
+        <br />
+        <p>Here is the contact information we have on file for you:</p>
+        <p><strong>Vendor Name:</strong> {$oRegistration->strVendorName}</p>
+        <p><strong>Business Type:</strong> {$oRegistration->strBusinessType}</p>
+        <p><strong>Sales Tax ID:</strong> {$oRegistration->strSalesTaxId}</p>
+        <p><strong>Email Address:</strong> {$oRegistration->strContactEmail}</p>
+        <p><strong>Alt Email Address:</strong> {$oRegistration->strAltEmail}</p>
+        <p><strong>Phone Number:</strong> {$oRegistration->strContactPhone}</p>
+        <p><strong>Address:</strong> {$oRegistration->strMailingAddress}</p>
+        <p><strong>City:</strong> {$oRegistration->strMailingCity}</p>
+        <p><strong>State:</strong> {$oRegistration->strMailingState}</p>
+        <p><strong>Zip:</strong> {$oRegistration->strMailingZip}</p>
+        <p><strong>Representative:</strong> {$oRegistration->strRep} ({$oRegistration->strRepPhone}/{$oRegistration->strRepCell})</p>
+        <p><strong>Alt Representative:</strong> {$oRegistration->strAlt} ({$oRegistration->strAltPhone}/{$oRegistration->strAltCell})</p>
+        <h3 style="color:#00A9E9">Booth Reservations</h3>
+        <p><strong>Large Booths (10x10)</strong> x {$oRegistration->iBigBooths}</p>
+        <p><strong>Small Booths (8x10)</strong> x {$oRegistration->iSmallBooths}</p>
+        <p><strong>Grand Total:</strong> ${$oRegistration->strTotal}</p>
+        <br />
+        <p>
+            If you need to change anything or have any questions, just send us
+            an email to let us know. You can reach us at
+            <a href="mailto:registration@familyeconomics.com">registration@familyeconomics.com</a>.
+        </p>
+EOF;
+        $strRetval .= $this->GetEmailFooter();
+        mail($strTo, $strSubject, $strRetval, $strHeaders);
+        return $strRetval;
+    }
+    
+    private function AddPaymentInfo(VendorRegistration $oRegistration)
+    {
+        return <<<EOF
+        <p>Your card has been successfully charged &#36;{$oRegistration->oPayment->dAmount}</p>
+EOF;
+    }
+    
+    private function GetEmailHeader()
+    {
+        return <<<EOF
+<html>
+    <body>
+        <div style="background:#E4D30B">
+        <img src="http://www.familyeconomics.com/wp-content/themes/family-economics/images/logo.png" />
+        </div>
+EOF;
+    }
+    
+    private function GetEmailFooter()
+    {
+        return <<<EOF
+        <p>
+            See you in May!
+        </p>
+        <p>
+            The Generations with Vision Team
+        </p>
+    </body>
+</html>
+EOF;
     }
 }
 
