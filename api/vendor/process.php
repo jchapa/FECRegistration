@@ -168,9 +168,9 @@ EOF;
         <h3 style="color:#00A9E9">Booth Reservations</h3>
         <p><strong>Large Booths (10x10)</strong> x {$oRegistration->iBigBooths}</p>
         <p><strong>Small Booths (8x10)</strong> x {$oRegistration->iSmallBooths}</p>
-        <p><strong>Conference Pass</strong> x {$oRegistration->iConferencePassType}</p>
+        <p><strong>Conference Pass</strong> {$oRegistration->iConferencePassType} x {$oRegistration->iConferencePassQty}</p>
         <p><strong>Additional Badges</strong> x {$oRegistration->iAdditionalBadges}</p>
-        <p><strong>Grand Total:</strong> ${$oRegistration->strTotal}</p>
+        <p><strong>Grand Total:</strong> \${$oRegistration->strTotal}</p>
         <br />
         <p>
             If you need to change anything or have any questions, just send us
