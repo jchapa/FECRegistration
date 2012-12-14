@@ -73,8 +73,7 @@ class ProcessVendorAPIPage extends BaseAPIPage
         $oRegistration->strBillingAltPhone = $aPaymentValues["alt-phone"];
         $oRegistration->strBillingEmail = $aPaymentValues["email"];
         
-        $dPrice = 1.00;
-        // UNCOMMENT PAYMENT LOGIC WHEN RELEASING
+
         $dPrice = 0.00;
         $dPrice = $dPrice + ($oRegistration->iBigBooths * 340); // Big booths cost $340.00
         $dPrice = $dPrice + ($oRegistration->iSmallBooths * 265); // Small booths cost $265.00
@@ -93,6 +92,9 @@ class ProcessVendorAPIPage extends BaseAPIPage
         $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
         
         $oPayment = new Payment();
+        
+        // THIS NEEDS TO BE COMMENTED FOR RELEASE
+        $dPrice = 1.00;
         
         $oPayment->dAmount = $oRegistration->strTotal = $dPrice;
         
