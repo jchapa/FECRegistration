@@ -94,7 +94,7 @@ class ProcessVendorAPIPage extends BaseAPIPage
         $oPayment = new Payment();
         
         // THIS NEEDS TO BE COMMENTED FOR RELEASE
-        $dPrice = 1.00;
+        //$dPrice = 1.00;
         
         $oPayment->dAmount = $dPrice;
         $oRegistration->strTotal = $dPrice;
