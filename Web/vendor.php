@@ -224,7 +224,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
          </ul>
        </fieldset>            
 			<fieldset id="submit">
-                <input type="submit" id="btnSubmit" style="cursor:pointer;" value="Process Payment" />
+                <input type="submit" id="btnSubmit" style="cursor:pointer;" value="Process Payment" /> (Press button once, and once only) <!--  Or endure the wrath of our 250lb St. Bernard, Jimmy -->
             </fieldset>
 		</form>
 
