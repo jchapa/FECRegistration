@@ -54,7 +54,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 
 <div id="container">
 
-  <h2 class="entrytitle">May 2013 St. Louis Family Economics Registration</h2>
+  <h2 class="entrytitle">October 2013 Washington Family Economics Registration</h2>
   <!-- Attendees -->
   <div id="content" class="column">
 
@@ -80,12 +80,12 @@ if (isset($aPersonalFormSessionData["registration-type"]))
        <div style="clear:both; margin-top:20px; margin-bottom:10px">
                   <span>
                       <strong>Family Rate</strong> (includes immediate family): 
-                      <span style="text-decoration:line-through">Regular Price: $299</span> Early Bird Discount: $199
+                      <span style="text-decoration:line-through">Regular Price: $149</span> Early Bird Discount: $119
                   </span>
                   <br />
                   <span>
                       <strong>Individual Rate</strong>: 
-                      <span style="text-decoration:line-through">Regular Price: $109</span> Early Bird Discount: $89
+                      <span style="text-decoration:line-through">Regular Price: $55</span> Early Bird Discount: $45
                   </span>
               </div>
         <fieldset id="registration-info-dds">
@@ -162,10 +162,6 @@ if (isset($aPersonalFormSessionData["registration-type"]))
          </span>
          <span id="registration-total">
          </span>
-         <p>Reminder:  The Family Economics 2013 Mega Conference is a single event 
-            co-hosted by both Generations with Vision and CHEF of Missouri. 
-            Registration for this event covers the full 4-day admission and is 
-            not available separately.</p>
        </fieldset>
 
        <fieldset>
@@ -211,15 +207,6 @@ if (isset($aPersonalFormSessionData["registration-type"]))
              }
          ?>
          /> I plan to attend Saturday <br />
-         <br />
-         <input type="checkbox" name="worship" value="sun" 
-         <?php
-             if (isset($aPersonalFormSessionData["worship"]))
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to join Kevin Swanson and Reformation Church at the St. Charles Convention Center for worship on Sunday morning following the conference.
        </fieldset>
 
        <fieldset id="contact-info">

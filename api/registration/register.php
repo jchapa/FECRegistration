@@ -69,11 +69,11 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // What's it cost?
             if ($oRegistration->strRegistrationType === "individual")
             {
-                $dPrice = '89.00';
+                $dPrice = '45.00';
             }
             else
             {
-                $dPrice = '199.00';
+                $dPrice = '119.00';
             }
 
             // Who's Attending?
@@ -255,7 +255,8 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $aPaymentValues["card-name"],
                 $aPaymentValues["card-number"],
                 $strCCExp,
-                $aPaymentValues["csc"]
+                $aPaymentValues["csc"],
+                "FEC2012-02"
                 );
             // Here we determine what happened, and output it.
             $strRetval = json_encode(array("result" => $iPaymentFlag));
