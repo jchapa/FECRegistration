@@ -143,7 +143,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             if (isset($aPersonalSession["website"]))
                 $strReferrals .= "generations website/email, ";
             if (isset($aPersonalSession["chef"]))
-                $strReferrals .= "chef, ";
+                $strReferrals .= "christian heritage, ";
             if (isset($aPersonalSession["friend"]))
                 $strReferrals .= "friend/word of mouth, ";
             if (isset($aPersonalSession["chec"]))

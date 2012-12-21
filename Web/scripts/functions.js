@@ -21,9 +21,9 @@ function setRegTypeOnChange() {
         ;
         break;
     case 1:
-        $(".regular-price").text('$199');
-        $(".early-pricing").text('$299');
-        $("#registration-total").text('$199');
+        $(".regular-price").text('$149');
+        $(".early-pricing").text('$119');
+        $("#registration-total").text('$119');
         $("#attendee-num-li").fadeIn('fast', null, function() {
             $("#registration-setup").css('margin-bottom', '0')
         });
@@ -35,11 +35,11 @@ function setRegTypeOnChange() {
         ;
         break;
     case 2:
-        $(".regular-price").text('$89');
-        $(".early-pricing").text('$109');
-        $("#registration-total").text('$89');
+        $(".regular-price").text('$55');
+        $(".early-pricing").text('$45');
+        $("#registration-total").text('$45');
         $("#attendee-num-li").fadeOut('fast', null, function() {
-            $("#registration-setup").css('margin-bottom', '35px')
+            $("#registration-setup").css('margin-bottom', '35px');
         });
         $("#attendee-total").text('Individual Registration');
         var intPersonLICount = $("ul#person-information-list li").length;
@@ -135,40 +135,6 @@ $(document).ready(
                     // Number of Attendees Function - Math included to calculate
                     // and trim LI's
                     $("select#number-of-attendees").change(setNumOfAttOnChange);
-
-                    // Attending Functions
-                    $("#all-days").click(function() {
-                        if (this.checked) {
-                            $("input.select-days").attr("disabled", true);
-                            $(".select-days:checked").checked = false;
-                        } else {
-                            $("input.select-days").removeAttr("disabled");
-                        }
-                    });
-
-                    $(".select-days").click(function() {
-                        var checked = $(".select-days:checked").length;
-                        switch (checked) {
-                        case 0:
-                            $("input#all-days").removeAttr("disabled");
-                            break;
-                        case 1:
-                            $("input#all-days").attr("disabled", true);
-                            break;
-                        case 2:
-                            $("input#all-days").attr("disabled", true);
-                            break;
-                        case 3:
-                            $("input#all-days").attr("disabled", true);
-                            break;
-                        case 4:
-                            $("input#all-days").removeAttr("disabled");
-                            $(".select-days:checked").attr('checked', false);
-                            $("input#all-days").attr('checked', true);
-                            $("input.select-days").attr("disabled", true);
-                            break;
-                        }
-                    });
 
                     // Other Checkbox Enable/Disable
                     $("#other").click(function() {

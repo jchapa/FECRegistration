@@ -164,51 +164,6 @@ if (isset($aPersonalFormSessionData["registration-type"]))
          </span>
        </fieldset>
 
-       <fieldset>
-         <h2>Let Us Know When You Will Be There!</h2>
-         <input type="checkbox" name="all-days" id="all-days" value="all" 
-         <?php
-             if ($aPersonalFormSessionData["select-days"] == "all-days")
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to attend all four days <br />
-         <span>OR (check all that apply)</span><br />
-         <input type="checkbox" name="select-days" class="select-days" value="weds" 
-         <?php
-             if (false !== strpos($aPersonalFormSessionData["select-days"], "weds"))
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to attend Wednesday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="thurs" 
-         <?php
-             if (false !== strpos($aPersonalFormSessionData["select-days"], "thurs"))
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to attend Thursday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="fri" 
-         <?php
-             if (false !== strpos($aPersonalFormSessionData["select-days"], "fri"))
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to attend Friday <br />
-         <input type="checkbox" name="select-days" class="select-days" value="sat" 
-         <?php
-             if (false !== strpos($aPersonalFormSessionData["select-days"], "sat"))
-             {
-                 echo "checked=\"checked\"";
-             }
-         ?>
-         /> I plan to attend Saturday <br />
-       </fieldset>
-
        <fieldset id="contact-info">
          <h2>Contact Information</h2>
          <ul>
@@ -334,7 +289,7 @@ if (isset($aPersonalFormSessionData["registration-type"]))
                       echo 'checked="checked"';
                   }
               ?>
-            /> CHEF
+            /> Christian Heritage
           </li>
          	<li>
             <input type="checkbox" class="reference-cbox"  id="friend" value="friend" name="friend" 
