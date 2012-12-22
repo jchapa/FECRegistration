@@ -54,7 +54,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
 
 <div id="container">
 
-  <h2 class="entrytitle">October 2013 Washington Family Economics Registration</h2>
+  <h2 class="entrytitle">October 2013 Washington Family Economics</h2>
   <!-- Attendees -->
   <div id="content" class="column">
   

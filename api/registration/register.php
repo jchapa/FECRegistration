@@ -20,9 +20,9 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $bIsError = true;
             // Oh snap. We need a registration id (or comma delimited set).
             $aResponse = array(
-                "result" => "error",
-                "message" => "Oh Snap! I need a registration Id"
-                );
+                    "result" => "error",
+                    "message" => "Oh Snap! I need a registration Id"
+            );
             $this->SendResponse(json_encode($aResponse));
             unset ($aResponse);
             exit;
@@ -33,10 +33,10 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
     {
         /* We have a couple steps in this workflow
          * 0) Submit registration with pending flag (stop if this fails - don't charge card)
-         * 1) Attempt to process payment
-         * 1.1) If Payment Fails: Send validation message - don't persist
-         * 1.2) If Payment Succeeds: Update pending flag, tell user you love him
-        */ 
+        * 1) Attempt to process payment
+        * 1.1) If Payment Fails: Send validation message - don't persist
+        * 1.2) If Payment Succeeds: Update pending flag, tell user you love him
+        */
         if (!$this->bIsError)
         {
             // Get our registration object all put together
@@ -44,7 +44,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $oRegistration->oFamily = new Family();
             $oRegistration->oPayment = new Payment();
             $oRegistration->oCoupon = new Coupon();
-            
+
             $dPrice = '0.00';
 
             // First get the session data (from the first page)
@@ -57,15 +57,15 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             if ($aPersonalSession["registration-type"] === "family")
             {
                 $oRegistration->strRegistrationType = "family";
-                $oRegistration->iAttendeeNumber = 
-                    $aPersonalSession["number-of-attendees"];
+                $oRegistration->iAttendeeNumber =
+                $aPersonalSession["number-of-attendees"];
             }
             else
             {
                 $oRegistration->strRegistrationType = "individual";
                 $oRegistration->iAttendeeNumber = 1;
             }
-            
+
             // What's it cost?
             if ($oRegistration->strRegistrationType === "individual")
             {
@@ -106,7 +106,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                     $aAttendees[$strAttendeeId][$strAgeKey] = $strPVal;
                 }
             }
-            
+
             foreach ($aAttendees as $aAttendee)
             {
                 $oFamilyMember = new FamilyMember();
@@ -125,7 +125,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $oRegistration->bAttendingFriday = true;
             $oRegistration->bAttendingThursday = true;
             $oRegistration->bAttendingWednesday = true;
-            
+
             // Address time!
             $oRegistration->strContactAddress1 = $aPersonalSession["street-1"];
             $oRegistration->strContactAddress2 = $aPersonalSession["street-2"];
@@ -135,7 +135,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $oRegistration->strContactPhone = $aPersonalSession["phone"];
             $oRegistration->strContactAltPhone = $aPersonalSession["alt-phone"];
             $oRegistration->strContactEmail = $aPersonalSession["email"];
-            
+
             // Referrals
             $strReferrals = "";
             if (isset($aPersonalSession["radio"]))
@@ -151,23 +151,23 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             // Still include a comma terminator to keep it consistant
             if (isset($aPersonalSession["other"]))
                 $strReferrals .= "other, ";
-            
+
             $oRegistration->strReferral = $strReferrals;
             unset($strReferrals);
-            
+
             // Now let's look at the payment post (which is what's happening here)
             $aPaymentValues = $_REQUEST;
-            
+
             // Don't waste their time, is there a coupon? Is it valid?
             $this->GetConnectionString();
-            
+
             if (isset($aPaymentValues["referral"]) && !empty($aPaymentValues["referral"]))
             {
                 $oCouponDataObject = new CouponDataObject(
-                    $this->m_dbHost,
-                    $this->m_dbName,
-                    $this->m_dbUser,
-                    $this->m_dbPass
+                        $this->m_dbHost,
+                        $this->m_dbName,
+                        $this->m_dbUser,
+                        $this->m_dbPass
                 );
                 $aCoupons = $oCouponDataObject->GetCouponList(0, 500);
                 $iDiscount = 0;
@@ -201,14 +201,14 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 }
             }
             // Else there's no coupon. Keep calm and carry on.
-            
+
             /*
              * I should have data for
-             * 1) Card Information (Name, number, etc)
-             * 2) Billing Address (which just might be the same as contact info,
-             *     but honeybadger don't care!)
-             */
-            
+            * 1) Card Information (Name, number, etc)
+            * 2) Billing Address (which just might be the same as contact info,
+                    *     but honeybadger don't care!)
+            */
+
             // First, the billing information, because it's easier
             if (!isset($aPaymentValues["street-1"]))
             {
@@ -222,7 +222,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $oRegistration->strBillingAltPhone = $oRegistration->strContactAltPhone;
                 $oRegistration->strBillingEmail = $oRegistration->strContactEmail;
             }
-            else 
+            else
             {
                 $oRegistration->strBillingAddress1 = $aPaymentValues["street-1"];
                 $oRegistration->strBillingAddress2 = $aPaymentValues["street-2"];
@@ -233,10 +233,10 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
                 $oRegistration->strBillingAltPhone = $aPaymentValues["alt-phone"];
                 $oRegistration->strBillingEmail = $aPaymentValues["email"];
             }
-            
-            
+
+
             // Get the payment info from the request.
-            
+
             // Payment Info
             $oRegistration->oPayment->dAmount = 1.00;
             // UNCOMMENT THE TWO FOLLOWING LINES WHEN RELEASING
@@ -244,23 +244,23 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             $oRegistration->oPayment->dAmount = $dPrice - $iDiscount;
             $strAuthNetTransKey = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_key.config');
             $strAuthNetTransId = file_get_contents(dirname(__FILE__) . '/../../../config/auth_net_transaction_id.config');
-            
+
             $strCCExp = $aPaymentValues["month"] . "/" . $aPaymentValues["year"];
-            
+
             // Time for payment information
             $iPaymentFlag = $oRegistration->oPayment->ProcessTransaction(
-                $oRegistration,
-                $strAuthNetTransKey,
-                $strAuthNetTransId,
-                $aPaymentValues["card-name"],
-                $aPaymentValues["card-number"],
-                $strCCExp,
-                $aPaymentValues["csc"],
-                "FEC2012-02"
-                );
+                    $oRegistration,
+                    $strAuthNetTransKey,
+                    $strAuthNetTransId,
+                    $aPaymentValues["card-name"],
+                    $aPaymentValues["card-number"],
+                    $strCCExp,
+                    $aPaymentValues["csc"],
+                    "FEC2012-02"
+            );
             // Here we determine what happened, and output it.
             $strRetval = json_encode(array("result" => $iPaymentFlag));
-            
+
             if ($iPaymentFlag == "1")
             {
                 $oRegistration->oPayment->iPaymentStatus = 1;
@@ -269,21 +269,21 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
             {
                 $oRegistration->oPayment->iPaymentStatus = 0;
             }
-            
+
             // Time to save the info in the database
             $oRegistrationDataContext = new RegistrationDataObject(
-                $this->m_dbHost,
-                $this->m_dbName,
-                $this->m_dbUser,
-                $this->m_dbPass
-                );
+                    $this->m_dbHost,
+                    $this->m_dbName,
+                    $this->m_dbUser,
+                    $this->m_dbPass
+            );
             $oRegistrationDataContext->AddRegistration($oRegistration);
-            
+
             if ($iPaymentFlag == "1")
             {
                 $this->SendEmailConfirmations($oRegistration);
             }
-            
+
             // Output the response
             $this->SendResponse($strRetval);
             //unset($stuff, $andThings);
@@ -293,14 +293,14 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
     protected function SendEmailConfirmations(Registration $oRegistration)
     {
         // time to send an email!
-        
+
         /*
          * We send three confirmations
-         * 1) to the registrant (with their contact email address)
-         * 2) to the guy was paid for it (if different from registrant - yes, we're that cool)
-         * 3) To the cool FEC people (jack, megan, chad at this point)
-         */
-        
+        * 1) to the registrant (with their contact email address)
+        * 2) to the guy was paid for it (if different from registrant - yes, we're that cool)
+        * 3) To the cool FEC people (jack, megan, chad at this point)
+        */
+
         // First let's send the registration email(s)
         $bIncludePayment = true;
         if ($oRegistration->strBillingAddress1 != $oRegistration->strContactAddress1)
@@ -310,7 +310,7 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
         }
         $bRegEmail = $this->SendRegistrantEmail($oRegistration, $bIncludePayment);
     }
-    
+
     private function SendRegistrantEmail(Registration $oRegistration, $bIncludePayment)
     {
         $strTo = $oRegistration->strContactEmail . ", registration@familyeconomics.com";
@@ -319,10 +319,8 @@ class RegisterRegistrationAPIPage extends BaseAPIPage
         $strSubject = "Registration Confirmation - Family Economics 2013 - MO";
         $strRetval = $this->GetEmailHeader();
         $strRetval .= <<<EOF
-        <h2 style="color:#00A9E9">Registration Confirmation</h2>
-        <p>You are successfully registered for the 2013 Family Economics Conference!
-        We look forward to having you join us in May as we cast a vision for 
-        family economics.</p>
+        <h2 style="color:#FBB044">Registration Confirmation - Family Economics 2013 - WA</h2>
+        <p>You are successfully registered for the 2013 Washington Family Economics Conference! We look forward to having you join us in October as we cast a vision for family economics.</p>
 EOF;
         if ($bIncludePayment)
         {
@@ -332,21 +330,21 @@ EOF;
         {
             $this->SendPaymentEmail($oRegistration);
         }
-        
+
         if ($oRegistration->strRegistrationType == "individual")
         {
             $strRetval .= <<<EOF
         <p>We will have your name badge prepared. Here is how it will appear:</p>
 EOF;
         }
-        else 
+        else
         {
             $strRetval .= <<<EOF
         <p>We will have your name badges prepared for the following registrants:</p>
         <br />
 EOF;
         }
-        
+
         foreach ($oRegistration->oFamily->aFamilyMembers as $oFamilyM)
         {
             $strRetval .= <<<EOF
@@ -355,7 +353,7 @@ EOF;
             </p>
 EOF;
         }
-        
+
         $strRetval .= <<<EOF
         <br />
         <p>Here is the contact information we have on file for you:</p>
@@ -368,7 +366,7 @@ EOF;
         <p><strong>Zip:</strong> {$oRegistration->strContactZip}</p>
         <br />
         <p>
-            If you need to change anything or have any questions, just send us 
+            If you need to change anything or have any questions, just send us
             an email to let us know. You can reach us at
             <a href="mailto:registration@familyeconomics.com">registration@familyeconomics.com</a>.
         </p>
@@ -377,14 +375,14 @@ EOF;
         mail($strTo, $strSubject, $strRetval, $strHeaders);
         return $strRetval;
     }
-    
+
     private function AddPaymentInfo(Registration $oRegistration)
     {
         return <<<EOF
         <p>Your card has been successfully charged &#36;{$oRegistration->oPayment->dAmount}</p>
 EOF;
     }
-    
+
     /**
      * We only send this if billing and shipping emails differ
      */
@@ -399,7 +397,7 @@ EOF;
         <h2 style="color:#00A9E9">Registration Billing Confirmation</h2>
         <p>Your registration payment for the 2013 Family Economics conference was successful</p>
         <p>This is not a registration confirmation - that will arrive in a separate email,
-        as it was addressed on the first page of registration 
+        as it was addressed on the first page of registration
         (your billing email address may have been different)</p>
 EOF;
         $strRetval .= $this->AddPaymentInfo($oRegistration);
@@ -407,23 +405,23 @@ EOF;
         // Mail it!
         mail ($strTo, $strSubject, $strRetval, $strHeaders);
     }
-    
+
     private function GetEmailHeader()
     {
         return <<<EOF
 <html>
     <body>
         <div style="background:#E4D30B">
-        <img src="http://www.familyeconomics.com/wp-content/themes/family-economics/images/logo.png" />
+        <img src="http://www.familyeconomics.com/wp-content/themes/family-economics/images/logowa.jpg" />
         </div>
 EOF;
     }
-    
+
     private function GetEmailFooter()
     {
         return <<<EOF
         <p>
-            See you in May!
+            See you in October!
         </p>
         <p>
             The Generations with Vision Team
