@@ -59,7 +59,7 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
   <div id="content" class="column">
   
 		
-    <form id="billing-info" action="/api/registration/register.php" class="fec-form">
+    <form id="billing-info" action="/washington/api/registration/register.php" class="fec-form">
        <fieldset id="contact-info">
          <h2>Billing Information</h2>
          <ul>
