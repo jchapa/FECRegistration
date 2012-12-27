@@ -439,33 +439,44 @@ if (isset($aPersonalFormSessionData["registration-type"]))
 <div id="footer">
 <div id="footer-container">
 
-
-
-					
-					<ul class="widgets column">
+<ul class="widgets column">
 						<li id="text-2" class="widget-container widget_text"><h5 class="widget-title">Spread the Word</h5>			<div class="textwidget"><ul id="social">
-<li>Facebook</li>
-<li>Twitter</li>
-<li>Email</li>
-</ul><!--End #social--></div>
+<li><a href="http://www.facebook.com/events/194482497347433/?ref=ts" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.facebook.com']);">Facebook</a></li>
+<a href="https://twitter.com/share" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://twitter.com']);" class="twitter-share-button" data-url="http://www.familyeconomics.com/" data-text="Twitter" data-count="none">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</ul><!--End #social-->
+<a href="http://www.familyeconomics.com/conference/help-spread-the-word/" >Conference Graphics and Flyers</a></div>
+		</li><li id="text-6" class="widget-container widget_text"><h5 class="widget-title">The Vision</h5>			<div class="textwidget"><p><a href="https://www.familyeconomics.com/vision/" >A Taste of the Vision</a><br />
+<a href="https://www.familyeconomics.com/history/" >History</a><br />
+<a href="https://www.familyeconomics.com/143-2/meet-the-families/" >Meet the Families</a></p>
+</div>
+		</li><li id="text-5" class="widget-container widget_text"><h5 class="widget-title">Contact Us</h5>			<div class="textwidget"><a href="http://www.familyeconomics.com/contact-us/" >Contact Us</a></div>
 		</li>					</ul><!--End .widgets-->
 
 					<ul class="widgets column">
-						<li id="pages-3" class="widget-container widget_pages"><h5 class="widget-title">Info</h5>		<ul>
-			<li class="page_item page-item-63"><a href="http://www.familyeconomics.com/conference/">Conference</a></li>
-<li class="page_item page-item-184 current_page_item"><a href="http://www.familyeconomics.com/facility-accommodations/">Facility/Accommodations</a></li>
-<li class="page_item page-item-8"><a href="http://www.familyeconomics.com/history/">History</a></li>
-<li class="page_item page-item-206"><a href="http://www.familyeconomics.com/schedule/">Schedule</a></li>
-<li class="page_item page-item-147"><a href="http://www.familyeconomics.com/speakers/">Speakers</a></li>
-<li class="page_item page-item-257"><a href="http://www.familyeconomics.com/sponsors/">Sponsors</a></li>
-<li class="page_item page-item-4"><a href="http://www.familyeconomics.com/vision/">Vision</a></li>
+						<li id="pages-3" class="widget-container widget_pages"><h5 class="widget-title">MO Conference</h5>		<ul>
+			<li class="page_item page-item-4"><a href="https://www.familyeconomics.com/vision/">Vision</a></li>
+<li class="page_item page-item-8"><a href="https://www.familyeconomics.com/history/">History</a></li>
+<li class="page_item page-item-63"><a href="https://www.familyeconomics.com/conference/stlouis/">St. Louis Conference</a></li>
+<li class="page_item page-item-231"><a href="https://www.familyeconomics.com/conference/stlouis/registration-2/">Registration Information</a></li>
+<li class="page_item page-item-147"><a href="https://www.familyeconomics.com/conference/stlouis/speakers/">Speakers</a></li>
+<li class="page_item page-item-184"><a href="https://www.familyeconomics.com/conference/stlouis/facility-accommodations/">Facility/Accommodations</a></li>
+<li class="page_item page-item-206"><a href="https://www.familyeconomics.com/conference/stlouis/schedule/">Schedule</a></li>
+<li class="page_item page-item-252"><a href="https://www.familyeconomics.com/conference/stlouis/travel-and-dining/">Travel and Dining</a></li>
+<li class="page_item page-item-289"><a href="https://www.familyeconomics.com/conference/stlouis/area-attractions/">Area Attractions</a></li>
+<li class="page_item page-item-491"><a href="https://www.familyeconomics.com/conference/stlouis/vendors/">Vendors</a></li>
+<li class="page_item page-item-257"><a href="https://www.familyeconomics.com/conference/stlouis/sponsors/">Sponsors</a></li>
 		</ul>
 		</li>					</ul><!--End .widgets-->
 
 					<ul class="widgets column">
-						<li id="text-3" class="widget-container widget_text"><h5 class="widget-title">Registration</h5>			<div class="textwidget">Registration information coming soon.
-</div>
-		</li>					</ul><!--End .widgets-->
+						<li id="nav_menu-2" class="widget-container widget_nav_menu"><h5 class="widget-title">WA Conference</h5><div class="menu-washington-side-menu-container"><ul id="menu-washington-side-menu" class="menu"><li id="menu-item-704" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-704"><a href="https://www.familyeconomics.com/conference/washington/" >Washington Conference</a></li>
+<li id="menu-item-734" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-734"><a href="https://www.familyeconomics.com/history/" >History</a></li>
+<li id="menu-item-735" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-735"><a href="https://www.familyeconomics.com/vision/" >Vision</a></li>
+<li id="menu-item-732" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-732"><a href="https://www.familyeconomics.com/conference/washington/washingto-speakers/" >Speakers</a></li>
+<li id="menu-item-731" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-731"><a href="https://www.familyeconomics.com/conference/washington/washington-facility-and-accomodations/" >Facility and Accomodations</a></li>
+<li id="menu-item-730" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-730"><a href="https://www.familyeconomics.com/washington-travel-and-dining/" >Travel and Dining</a></li>
+</ul></div></li>					</ul><!--End .widgets-->
 </div><!--End #footer-container-->
 
 </div><!--End #footer-->
