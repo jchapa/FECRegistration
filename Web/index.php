@@ -80,12 +80,12 @@ if (isset($aPersonalFormSessionData["registration-type"]))
        <div style="clear:both; margin-top:20px; margin-bottom:10px">
                   <span>
                       <strong>Family Rate</strong> (includes immediate family): 
-                      <span style="text-decoration:line-through">$299 Regular Price</span> Early Bird Discount: $259
+                      <span style="text-decoration:line-through">$299 Regular Price</span> Discount: $259
                   </span>
                   <br />
                   <span>
                       <strong>Individual Rate</strong>: 
-                      <span style="text-decoration:line-through">$109 Regular Price</span> Early Bird Discount: $99
+                      <span style="text-decoration:line-through">$109 Regular Price</span> Discount: $99
                   </span>
               </div>
         <fieldset id="registration-info-dds">
