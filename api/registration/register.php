@@ -391,7 +391,7 @@ EOF;
         $strTo = $oRegistration->strBillingEmail . ", registration@familyeconomics.com";
         $strHeaders = "From: Family Economics Registration <registration@familyeconomics.com> . \r\n";
         $strHeaders .= "Content-type: text/html\r\n";
-        $strSubject = "Registration Billing Confirmation - Family Economics 2013 - MO";
+        $strSubject = "Registration Billing Confirmation - Family Economics 2013 - WA";
         $strRetval = $this->GetEmailHeader();
         $strRetval .= <<<EOF
         <h2 style="color:#00A9E9">Registration Billing Confirmation</h2>
