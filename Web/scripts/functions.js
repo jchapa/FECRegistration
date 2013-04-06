@@ -21,9 +21,9 @@ function setRegTypeOnChange() {
         ;
         break;
     case 1:
-        $(".regular-price").text('$199');
-        $(".early-pricing").text('$299');
-        $("#registration-total").text('$199');
+        $(".regular-price").text('$299');
+        //$(".early-pricing").text('$299');
+        $("#registration-total").text('$299');
         $("#attendee-num-li").fadeIn('fast', null, function() {
             $("#registration-setup").css('margin-bottom', '0')
         });
@@ -35,8 +35,8 @@ function setRegTypeOnChange() {
         ;
         break;
     case 2:
-        $(".regular-price").text('$89');
-        $(".early-pricing").text('$109');
+        $(".regular-price").text('$109');
+        //$(".early-pricing").text('$109');
         $("#registration-total").text('$89');
         $("#attendee-num-li").fadeOut('fast', null, function() {
             $("#registration-setup").css('margin-bottom', '35px')
