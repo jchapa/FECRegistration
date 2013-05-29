@@ -251,11 +251,11 @@ require_once (dirname(__FILE__) . "/inc/header.inc");
                 {
                     if ($aPersonalFormSessionData["registration-type"] === "family")
                     {
-                        echo "$119";
+                        echo "$149";
                     }
                     else
                     {
-                        echo "$45";
+                        echo "$55";
                     }
                 }
             ?>
